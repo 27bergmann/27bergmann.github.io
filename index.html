@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Berg Hub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container fade-in">
+
+    <h1>Berg Hub</h1>
+    <p class="subtitle" id="subtitle">
+        Platform Scripting | Roblox Executor
+    </p>
+
+    <div class="card slide-up">
+        <h2>&lt;/&gt; Script Loadstring</h2>
+        <p class="secure" id="secure">🔒 Secure Connection</p>
+
+        <div class="code-box" id="code">
+loadstring(game:HttpGet("https://27bergmann.github.io/main.lua"))()
+        </div>
+
+        <button onclick="copyScript()" id="copyBtn">
+            📋 Copy to Clipboard
+        </button>
+
+        <p class="info" id="info">
+            Paste this script into your executor to run it.
+        </p>
+    </div>
+
+    <div class="lang">
+        <button onclick="setEN()">EN</button>
+        <button onclick="setID()">ID</button>
+    </div>
+
+    <footer>
+        © 2025 Berg Hub. All rights reserved.
+    </footer>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
