@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Berg Hub</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="favicon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<audio id="clickSound" src="click.mp3"></audio>
+<audio id="copySound" src="copy.mp3"></audio>
+
+<div class="bg-glow"></div>
+
+<div class="wrapper">
+
+    <h1 class="title">Berg Hub</h1>
+    <div class="title-line"></div>
+
+    <p class="subtitle" id="subtitle"></p>
+
+    <div class="card">
+
+        <div class="header">
+            <span class="icon lock"></span>
+            <span id="secure"></span>
+        </div>
+
+        <div class="script-box" id="code">
+loadstring(game:HttpGet("https://27bergmann.github.io/main.lua"))()
+        </div>
+
+        <button class="copy-btn" onclick="copyScript()">
+            <span class="icon clipboard"></span>
+            <span id="copyText"></span>
+        </button>
+
+        <p class="info" id="info"></p>
+    </div>
+
+    <div class="socials">
+        <a href="https://discord.gg/YOUR" target="_blank">Discord</a>
+        <a href="https://youtube.com" target="_blank">YouTube</a>
+        <a href="https://scriptblox.com" target="_blank">ScriptBlox</a>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
