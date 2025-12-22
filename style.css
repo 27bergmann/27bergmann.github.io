@@ -1,0 +1,373 @@
+/* Reset and base */
+* {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  scrollbar-width: thin;
+  scrollbar-color: #ff4b4b transparent;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-color: #2c0000;
+  color: #ff8787;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  align-items: center;
+  font-size: 16px;
+  overflow-x: hidden;
+  user-select: none;
+}
+
+.container {
+  width: 90%;
+  max-width: 430px;
+  text-align: center;
+  padding: 30px 25px;
+  border-radius: 18px;
+  background: #3b0000;
+  box-shadow:
+    0 0 15px #d32727,
+    inset 0 0 80px #ff5454,
+    inset 0 0 40px #ff4444;
+  animation: pulse-glow 6s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow:
+      0 0 15px #ff5252,
+      0 0 30px #ff3232,
+      0 0 50px #ff0f0f;
+  }
+  50% {
+    box-shadow:
+      0 0 30px #ff7373,
+      0 0 60px #ff4545,
+      0 0 90px #ff1f1f;
+  }
+}
+
+/* Neon glowing text animation with flicker effect */
+header h1.neon-text {
+  font-size: 3.2rem;
+  font-weight: 900;
+  color: #fff;
+  text-shadow:
+    0 0 10px #ff4b4b,
+    0 0 30px #ff3333,
+    0 0 50px #ff1a1a;
+  margin-bottom: 8px;
+  border-bottom: 4px solid #e03e3e;
+  display: inline-block;
+  padding-bottom: 8px;
+  animation: neon-flicker 4s infinite alternate;
+  user-select: text;
+}
+
+@keyframes neon-flicker {
+  0%, 100% {
+    opacity: 1;
+    text-shadow:
+      0 0 10px #ff4b4b,
+      0 0 30px #ff3333;
+  }
+  50% {
+    opacity: 0.87;
+    text-shadow:
+      0 0 5px #ff2e2e,
+      0 0 15px #ff1f1f;
+  }
+}
+
+/* Scrolling subtitle */
+.subtitle.scroll-text {
+  color: #d98b8b;
+  font-weight: 400;
+  font-size: 1rem;
+  margin-top: -6px;
+  white-space: nowrap;
+  overflow: hidden;
+  box-sizing: border-box;
+  position: relative;
+  height: 22px;
+  user-select: none;
+}
+
+.subtitle.scroll-text::before {
+  content: "Platform Scripting | Roblox Executor   •   ";
+  position: absolute;
+  white-space: nowrap;
+  will-change: transform;
+  animation: scroll-left-right 16s linear infinite;
+  color: #c26868;
+  top: 0;
+  left: 100%;
+  padding-left: 100%;
+}
+
+@keyframes scroll-left-right {
+  0% {
+    transform: translateX(0%);
+  }
+  50% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+/* Script Loadstring Section */
+section.script-loadstring {
+  background: #2c0000;
+  margin-top: 28px;
+  border-radius: 16px;
+  padding: 24px 22px;
+  box-shadow:
+    0 0 25px #ff5959;
+  color: #ff8e8e;
+  border: 1px solid #630000;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.4s ease;
+}
+
+section.script-loadstring:hover {
+  box-shadow:
+    0 0 40px #ff7474,
+    inset 0 0 35px #ff7a7a;
+}
+
+section.script-loadstring h2 {
+  text-align: left;
+  font-weight: 800;
+  font-size: 1.7rem;
+  margin-bottom: 10px;
+  color: #ff5e5e;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+}
+
+.code-icon svg {
+  stroke: #ff4b4b;
+  width: 26px;
+  height: 26px;
+  stroke-width: 2;
+}
+
+.secure-connection {
+  font-size: 1.05rem;
+  color: #ff6e6e;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  user-select: none;
+  font-weight: 500;
+}
+
+.shield-icon svg {
+  stroke: #ff4b4b;
+  width: 20px;
+  height: 20px;
+  stroke-width: 2;
+}
+
+/* Scrollable textarea */
+textarea#script-url {
+  width: 100%;
+  padding: 14px 16px;
+  margin-top: 14px;
+  border-radius: 14px;
+  border: none;
+  background-color: #390000;
+  color: #ff6f6f;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 700;
+  resize: none;
+  height: 3.6rem;
+  box-shadow:
+    inset 0 0 15px #ff4b4b;
+  user-select: all;
+  cursor: text;
+  overflow-x: auto;
+  transition: box-shadow 0.3s ease;
+  white-space: nowrap;
+}
+
+textarea#script-url:focus {
+  outline: none;
+  box-shadow:
+    0 0 22px #ff7a7a;
+}
+
+/* Copy button with icon */
+button#copy-btn {
+  margin-top: 18px;
+  width: 100%;
+  padding: 16px 0;
+  background: linear-gradient(90deg, #d32727 0%, #ff4747 100%);
+  border: none;
+  color: white;
+  font-weight: 700;
+  font-size: 1.15rem;
+  border-radius: 22px;
+  cursor: pointer;
+  transition: background 0.3s ease, box-shadow 0.2s ease;
+  user-select: none;
+  box-shadow: 0 0 20px #ff3c3c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  filter: drop-shadow(0 0 3px #ff5555);
+}
+
+button#copy-btn:hover {
+  background: linear-gradient(90deg, #ff4747 0%, #d32727 100%);
+  box-shadow: 0 0 30px #ff5c5c;
+}
+
+.copy-icon svg {
+  stroke: white;
+  width: 22px;
+  height: 22px;
+  stroke-width: 2;
+}
+
+/* Scrolling info text */
+.info {
+  margin-top: 16px;
+  color: #dbbebe;
+  font-size: 0.9rem;
+  text-align: center;
+  letter-spacing: 0.05em;
+  user-select: none;
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+  height: 22px;
+}
+
+.scrolling-info::before {
+  content: "ℹ️ Paste this script into your executor to run   •   ";
+  position: absolute;
+  white-space: nowrap;
+  will-change: transform;
+  animation: scroll-info-horizontal 20s linear infinite;
+  color: #d07e7e;
+  top: 0;
+  left: 100%;
+  padding-left: 100%;
+}
+
+@keyframes scroll-info-horizontal {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Footer styling */
+footer {
+  margin-top: 48px;
+  font-size: 0.9rem;
+  color: #bf9090;
+  text-align: center;
+  user-select: none;
+}
+
+.social-buttons {
+  margin-top: 18px;
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+}
+
+.social-buttons a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 30px;
+  border-radius: 18px;
+  font-weight: 700;
+  color: white;
+  text-decoration: none;
+  font-size: 1.05rem;
+  box-shadow: 0 0 14px #720000;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  filter: drop-shadow(0 0 4px rgba(0,0,0,0.25));
+}
+
+.social-buttons a svg {
+  width: 24px;
+  height: 24px;
+  stroke-width: 1.8;
+  stroke: white;
+  user-select: none;
+  filter: drop-shadow(0 0 3px rgba(0,0,0,0.5));
+}
+
+.discord-btn {
+  background-color: #5865f2;
+  box-shadow: 0 0 20px #5865f2;
+}
+
+.discord-btn:hover {
+  background-color: #4752c4;
+  box-shadow: 0 0 32px #4752c4;
+}
+
+.youtube-btn {
+  background-color: #c4302b;
+  box-shadow: 0 0 20px #c4302b;
+}
+
+.youtube-btn:hover {
+  background-color: #9d2723;
+  box-shadow: 0 0 32px #9d2723;
+}
+
+/* Scrollbar for textarea */
+textarea#script-url::-webkit-scrollbar {
+  height: 6px;
+}
+
+textarea#script-url::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+textarea#script-url::-webkit-scrollbar-thumb {
+  background-color: #ff4747;
+  border-radius: 12px;
+}
+
+/* Responsive font scaling */
+@media (max-width: 400px) {
+  .container {
+    padding: 20px 18px;
+  }
+
+  section.script-loadstring h2 {
+    font-size: 1.4rem;
+  }
+
+  button#copy-btn {
+    font-size: 1rem;
+    padding: 14px 0;
+  }
+
+  .social-buttons a {
+    font-size: 0.95rem;
+    padding: 10px 22px;
+    gap: 8px;
+  }
+}
