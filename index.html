@@ -182,40 +182,40 @@
         }
         .feature-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Up to 3 per row */
-            gap: 16px; /* Bigger spacing */
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
         }
         .feature-box {
-            padding: 18px; /* Bigger padding for larger look */
+            padding: 14px;
             background: linear-gradient(180deg, #120000, #080000);
-            border-radius: 16px; /* Slightly rounder */
+            border-radius: 12px;
             border: 1px solid rgba(255,0,0,.1);
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-size: 14px; /* Slightly bigger font */
+            gap: 10px;
+            font-size: 13px;
             text-decoration: none;
             color: white;
             transition: all .3s ease;
             cursor: pointer;
-            min-height: 70px; /* Taller cards */
         }
         .feature-box:hover {
             background: linear-gradient(180deg, #1a0000, #0a0000);
             border-color: rgba(255,0,0,.3);
             transform: translateY(-2px);
         }
-        .feature-box img {
-            width: 24px; /* Slightly bigger icon for visibility */
-            height: 24px;
+        .feature-box svg, .feature-box img {
+            width: 20px;
+            height: 20px;
             flex-shrink: 0;
-            border-radius: 6px;
+            border-radius: 4px;
             object-fit: cover;
         }
-        .feature-box svg {
-            width: 24px;
-            height: 24px;
-            flex-shrink: 0;
+        .feature-box.secure svg {
+            stroke: #7dff7d;
+            fill: none;
+        }
+        .feature-box.opensource svg {
             stroke: #d4514a;
             fill: none;
         }
@@ -226,17 +226,60 @@
         .feature-title {
             font-weight: 600;
             margin-bottom: 2px;
-            font-size: 15px; /* Bigger title */
         }
         .feature-desc {
             opacity: .6;
-            font-size: 12px;
+            font-size: 11px;
         }
-        .status-badge {
+
+        /* Games page - BIGGER cards, up to 3 per row */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* Bigger min width for larger cards, max 3 per row */
+            gap: 20px; /* More spacing */
+            margin-top: 20px;
+        }
+        .game-card {
+            padding: 24px; /* Much bigger padding */
+            background: linear-gradient(180deg, #120000, #080000);
+            border-radius: 16px;
+            border: 1px solid rgba(255,0,0,.1);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 15px; /* Bigger text */
+            text-decoration: none;
+            color: white;
+            transition: all .3s ease;
+            min-height: 100px; /* Taller */
+        }
+        .game-card:hover {
+            background: linear-gradient(180deg, #1a0000, #0a0000);
+            border-color: rgba(255,0,0,.3);
+            transform: translateY(-4px);
+        }
+        .game-card img {
+            width: 60px; /* Much bigger icon for good visibility */
+            height: 60px;
+            flex-shrink: 0;
+            border-radius: 10px;
+            object-fit: cover;
+            box-shadow: 0 0 15px rgba(255,0,0,.4);
+        }
+        .game-text {
+            text-align: left;
+            flex: 1;
+        }
+        .game-title {
+            font-weight: 600;
+            font-size: 18px; /* Bigger title */
+            margin-bottom: 4px;
+        }
+        .game-status {
             margin-left: auto;
-            padding: 6px 12px; /* Bigger badge */
-            border-radius: 12px;
-            font-size: 12px;
+            padding: 8px 16px; /* Bigger badge */
+            border-radius: 14px;
+            font-size: 13px;
             font-weight: 600;
         }
         .status-working {
@@ -250,7 +293,6 @@
             border: 1px solid rgba(255,200,0,.3);
         }
 
-        /* Games page */
         .back-btn {
             display: inline-flex;
             align-items: center;
@@ -289,6 +331,12 @@
             }
             .social-links {
                 grid-template-columns: repeat(3, 1fr);
+            }
+            .games-grid {
+                grid-template-columns: 1fr; /* Stack on mobile */
+            }
+            .game-card {
+                padding: 20px;
             }
         }
     </style>
@@ -384,7 +432,7 @@
         </div>
     </div>
 
-    <!-- Supported Games Page -->
+    <!-- Supported Games Page - BIGGER and BETTER -->
     <div id="gamesPage" class="container page">
         <button class="back-btn" onclick="showMain()">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -399,24 +447,24 @@
         <div class="line"></div>
         <p class="subtitle">List of games currently supported by Berg Hub</p>
 
-        <div class="feature-grid">
-            <a href="https://www.roblox.com/games/18856160616" target="_blank" class="feature-box opensource">
+        <div class="games-grid">
+            <a href="https://www.roblox.com/games/18856160616" target="_blank" class="game-card">
                 <img src="https://tr.rbxcdn.com/30DAY-150x150/18856160616/Png" alt="Undead Defense Icon" loading="lazy">
-                <div class="feature-text">
-                    <div class="feature-title">Undead Defense</div>
-                    <div class="feature-desc"></div>
+                <div class="game-text">
+                    <div class="game-title">Undead Defense</div>
                 </div>
-                <span class="status-badge status-working">Working</span>
+                <span class="game-status status-working">Working</span>
             </a>
 
-            <a href="https://www.roblox.com/games/12177325772" target="_blank" class="feature-box opensource">
+            <a href="https://www.roblox.com/games/12177325772" target="_blank" class="game-card">
                 <img src="https://tr.rbxcdn.com/30DAY-150x150/12177325772/Png" alt="FIFA Super Soccer! Icon" loading="lazy">
-                <div class="feature-text">
-                    <div class="feature-title">FIFA Super Soccer!</div>
-                    <div class="feature-desc"></div>
+                <div class="game-text">
+                    <div class="game-title">FIFA Super Soccer!</div>
                 </div>
-                <span class="status-badge status-development">In-Development</span>
+                <span class="game-status status-development">In-Development</span>
             </a>
+
+            <!-- Add more games here if you want (up to 3 per row) -->
         </div>
     </div>
 
