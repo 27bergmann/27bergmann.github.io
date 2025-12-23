@@ -170,22 +170,8 @@
             margin-bottom: 24px;
         }
 
-        .secure-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            background: rgba(0,255,0,.05);
-            border: 1px solid rgba(0,255,0,.2);
-            border-radius: 12px;
-            color: #7dff7d;
-            font-size: 13px;
-            font-weight: 500;
-            margin-bottom: 18px;
-        }
-
         .script-box {
-            margin: 18px 0;
+            margin: 0 0 18px 0;
             padding: 16px;
             background: #0a0000;
             border-radius: 14px;
@@ -598,9 +584,6 @@
             .game-card {
                 padding: 20px;
             }
-            .feature-grid {
-                grid-template-columns: 1fr;
-            }
         }
     </style>
 </head>
@@ -614,14 +597,6 @@
         <div class="line"></div>
         <p class="subtitle">Roblox Scripts</p>
         <div class="card">
-            <div class="secure-badge">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#7dff7d" stroke-width="2">
-                    <rect x="5" y="11" width="14" height="10" rx="2"/>
-                    <path d="M12 17v-2"/>
-                    <path d="M7 11V7a5 5 0 0110 0v4"/>
-                </svg>
-                <span>Secure Connection</span>
-            </div>
             <div class="script-box">loadstring(game:HttpGet("https://27bergmann.github.io/main"))()</div>
             <button class="copy-btn" onclick="copyScript()">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -666,8 +641,7 @@
             </div>
             <a href="https://junkie-development.de/overview/berghub" target="_blank" class="feature-box">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-                    <path d="M12 2v20M2 12h20"/>
-                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/>
                 </svg>
                 <div class="feature-text">
                     <div class="feature-title">Berg Hub</div>
@@ -676,20 +650,20 @@
             </a>
             <a href="https://weao.xyz" target="_blank" class="feature-box">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                    <line x1="12" y1="8" x2="12" y2="16"/>
-                    <line x1="8" y1="12" x2="16" y2="12"/>
+                    <rect x="2" y="3" width="20" height="14" rx="2"/>
+                    <path d="M8 21h8"/>
+                    <path d="M12 17v4"/>
                 </svg>
                 <div class="feature-text">
                     <div class="feature-title">Supported Executor</div>
                     <div class="feature-desc">Check compatibility</div>
                 </div>
-            </a>
+            </div>
             <div class="feature-box" onclick="showGames()">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
-                    <path d="M16 7V5a2 2 0 0 0-2-2H10a2 2 0 0 0-2 2v2"/>
-                    <circle cx="12" cy="14" r="2"/>
+                    <path d="M6 12a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v0a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4v0z"/>
+                    <path d="M6 12h-.01M10 12h-.01M14 12h-.01M18 12h-.01"/>
+                    <path d="M12 8v8"/>
                 </svg>
                 <div class="feature-text">
                     <div class="feature-title">Supported Games</div>
@@ -750,292 +724,4 @@
         <div class="line"></div>
         <p class="subtitle">Share your suggestions, bugs, or requests</p>
         <div class="card">
-            <textarea id="feedbackInput" class="feedback-input" placeholder="Tell us what's on your mind...&#10;&#10;Examples:&#10;• Report a bug you encountered&#10;• Suggest a new game to support&#10;• Request a new feature&#10;• Share your experience" maxlength="1000" oninput="updateCharCounter()"></textarea>
-            <div id="charCounter" class="char-counter">0 / 1000 characters</div>
-            <button id="submitBtn" class="submit-btn" onclick="submitFeedback()">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
-                </svg>
-                <span>Submit Feedback</span>
-            </button>
-            <div id="statusMessage"></div>
-            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,0,0,0.1);">
-                <p style="font-size: 13px; opacity: 0.7; line-height: 1.5;">
-                    Your feedback helps us improve Berg Hub. We read every submission and use your input to make the experience better for everyone.
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <audio id="bgMusic" loop>
-        <source src="https://files.catbox.moe/cjqi6m.mp3" type="audio/mpeg">
-        Your browser does not support audio.
-    </audio>
-
-    <script>
-        const WEBHOOK_URL = "https://discord.com/api/webhooks/1452857867324620881/oP9x7OtJO2aRjV-_hh2T2grquqiIezidbZPlx1MnXZZG-s-fHP2ocUH4hzXQMQD3OpaV";
-        const COOLDOWN_TIME = 60;
-        const MIN_CHARS = 10;
-        const MAX_CHARS = 1000;
-
-        let lastSubmitTime = 0;
-        let cooldownTimer = null;
-
-        const titleText = "Berg Hub";
-        let i = 0;
-        const title = document.getElementById("title");
-
-        function typeTitle() {
-            if (i < titleText.length) {
-                title.textContent += titleText.charAt(i);
-                i++;
-                setTimeout(typeTitle, 120);
-            }
-        }
-        typeTitle();
-
-        function copyScript() {
-            const scriptContent = document.querySelector(".script-box").innerText;
-            navigator.clipboard.writeText(scriptContent);
-            const copyTextEl = document.getElementById("copyText");
-            copyTextEl.textContent = "Copied!";
-            setTimeout(() => {
-                copyTextEl.textContent = "Copy Script";
-            }, 1500);
-        }
-
-        function switchPage(fromPageId, toPageId) {
-            const fromPage = document.getElementById(fromPageId);
-            const toPage = document.getElementById(toPageId);
-
-            fromPage.classList.remove("active");
-            fromPage.classList.add("slide-exit");
-
-            setTimeout(() => {
-                fromPage.classList.remove("slide-exit");
-                toPage.classList.add("active", "slide-enter");
-            }, 400);
-        }
-
-        function showGames() {
-            switchPage("mainPage", "gamesPage");
-        }
-
-        function showFeedback() {
-            switchPage("mainPage", "feedbackPage");
-            document.getElementById("feedbackInput").value = '';
-            document.getElementById("statusMessage").textContent = '';
-            updateCharCounter();
-        }
-
-        function showMain() {
-            const currentPage = document.querySelector(".page.active");
-            if (currentPage.id === "gamesPage") {
-                switchPage("gamesPage", "mainPage");
-            } else {
-                switchPage("feedbackPage", "mainPage");
-            }
-        }
-
-        function updateCharCounter() {
-            const input = document.getElementById("feedbackInput");
-            const counter = document.getElementById("charCounter");
-            const count = input.value.length;
-            const isValid = count >= MIN_CHARS;
-
-            counter.textContent = `${count} / ${MAX_CHARS} characters`;
-            counter.classList.remove("valid", "invalid");
-
-            if (count === 0) {
-                counter.classList.add("invalid");
-            } else if (isValid) {
-                counter.classList.add("valid");
-            } else {
-                counter.classList.add("invalid");
-            }
-        }
-
-        function updateSubmitButton() {
-            const submitBtn = document.getElementById("submitBtn");
-            const now = Date.now();
-            const timeLeft = COOLDOWN_TIME - Math.floor((now - lastSubmitTime) / 1000);
-
-            if (timeLeft > 0) {
-                submitBtn.disabled = true;
-                submitBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Wait ${timeLeft}s</span>`;
-            } else {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg><span>Submit Feedback</span>`;
-                if (cooldownTimer) {
-                    clearInterval(cooldownTimer);
-                    cooldownTimer = null;
-                }
-            }
-        }
-
-        function submitFeedback() {
-            const input = document.getElementById("feedbackInput").value.trim();
-            const statusMessage = document.getElementById("statusMessage");
-
-            if (input.length < MIN_CHARS) {
-                statusMessage.textContent = `Feedback must be at least ${MIN_CHARS} characters.`;
-                statusMessage.className = "status-message status-error";
-                return;
-            }
-
-            if (input.length > MAX_CHARS) {
-                statusMessage.textContent = `Feedback must not exceed ${MAX_CHARS} characters.`;
-                statusMessage.className = "status-message status-error";
-                return;
-            }
-
-            statusMessage.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg><span>Sending feedback...</span>';
-            statusMessage.className = "status-message status-sending";
-
-            const payload = {
-                content: `**New Feedback from Berg Hub Website**\n\n${input}`
-            };
-
-            fetch(WEBHOOK_URL, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload)
-            })
-            .then(response => {
-                if (response.ok) {
-                    statusMessage.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg><span>Feedback sent successfully! Thank you for your input.</span>';
-                    statusMessage.className = "status-message status-success";
-                    document.getElementById("feedbackInput").value = "";
-                    updateCharCounter();
-                    lastSubmitTime = Date.now();
-                    updateSubmitButton();
-
-                    if (!cooldownTimer) {
-                        cooldownTimer = setInterval(updateSubmitButton, 1000);
-                    }
-                } else {
-                    statusMessage.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span>Error sending feedback. Try again later.</span>';
-                    statusMessage.className = "status-message status-error";
-                }
-            })
-            .catch(() => {
-                statusMessage.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span>Error sending feedback. Try again later.</span>';
-                statusMessage.className = "status-message status-error";
-            });
-        }
-
-        const canvas = document.getElementById('snowCanvas');
-        const ctx = canvas.getContext('2d');
-
-        let particleCount = 100;
-        if (window.innerWidth <= 768) {
-            particleCount = 40;
-        }
-
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            if (window.innerWidth <= 768) {
-                particleCount = 40;
-            } else {
-                particleCount = 100;
-            }
-            initParticles();
-        });
-
-        const particles = [];
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 3 + 1;
-                this.speedX = Math.random() * 0.5 - 0.25;
-                this.speedY = Math.random() * 0.8 + 0.3;
-                this.opacity = Math.random() * 0.4 + 0.2;
-            }
-
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-
-                if (this.y > canvas.height) {
-                    this.y = -10;
-                    this.x = Math.random() * canvas.width;
-                }
-                if (this.x > canvas.width || this.x < 0) {
-                    this.speedX *= -1;
-                }
-            }
-
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
-                ctx.shadowBlur = 8;
-                ctx.shadowColor = "rgba(255, 255, 255, 0.6)";
-                ctx.fill();
-            }
-        }
-
-        function initParticles() {
-            particles.length = 0;
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            requestAnimationFrame(animate);
-        }
-
-        initParticles();
-        animate();
-
-        const music = document.getElementById('bgMusic');
-        const musicIcon = document.getElementById('musicIcon');
-        const musicText = document.getElementById('musicText');
-        let isPlaying = false;
-
-        document.body.addEventListener('click', startMusic, { once: true });
-        document.body.addEventListener('touchstart', startMusic, { once: true });
-
-        function startMusic() {
-            music.play().catch(e => console.log("Auto-play prevented:", e));
-            isPlaying = true;
-            updateMusicIcon();
-        }
-
-        function updateMusicIcon() {
-            if (isPlaying) {
-                musicText.textContent = 'Mute Music';
-                musicIcon.innerHTML = '<path d="M9 18V5l12-2v13M9 18c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 9l12-2"/>';
-            } else {
-                musicText.textContent = 'Play Music';
-                musicIcon.innerHTML = '<path d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>';
-            }
-        }
-
-        function toggleMusic() {
-            if (isPlaying) {
-                music.pause();
-                isPlaying = false;
-            } else {
-                music.play();
-                isPlaying = true;
-            }
-            updateMusicIcon();
-        }
-
-        musicText.textContent = 'Mute Music';
-    </script>
-</body>
-</html>
+            <textarea id="feedbackInput" class="feedback-input" placeholder="Tell us what's on your mind...&#10;&#10;Examples:&#10;• Report a bug you encountered&#10;• Suggest a new game to support&#10;• Request a new feature&#10;• Share your experience" maxlength="1000
