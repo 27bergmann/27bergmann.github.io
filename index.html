@@ -4,7 +4,16 @@
     <meta charset="UTF-8">
     <title>Berg Hub</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="https://files.catbox.moe/r81dz4.png">
+    
+    <!-- Improved favicon declarations -->
+    <link rel="icon" href="https://files.catbox.moe/r81dz4.png" type="image/png">
+    <link rel="shortcut icon" href="https://files.catbox.moe/r81dz4.png" type="image/png">
+    <link rel="apple-touch-icon" href="https://files.catbox.moe/r81dz4.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://files.catbox.moe/r81dz4.png">
+    
+    <!-- Optional: Helps with mobile theme -->
+    <meta name="theme-color" content="#1a0000">
+
     <style>
         * {
             box-sizing: border-box;
@@ -223,7 +232,7 @@
             font-size: 11px;
         }
 
-        /* Feedback Page Styles (matching Supported Games colors) */
+        /* Feedback Page Styles */
         .feedback-info {
             margin: 20px 0;
             opacity: 0.85;
@@ -598,12 +607,13 @@
         // Copy function
         function copyScript() {
             const scriptContent = document.querySelector(".script-box").innerText;
-            navigator.clipboard.writeText(scriptContent);
-            const copyTextEl = document.getElementById("copyText");
-            copyTextEl.textContent = "Copied!";
-            setTimeout(() => {
-                copyTextEl.textContent = "Copy Script";
-            }, 1500);
+            navigator.clipboard.writeText(scriptContent).then(() => {
+                const copyTextEl = document.getElementById("copyText");
+                copyTextEl.textContent = "Copied!";
+                setTimeout(() => {
+                    copyTextEl.textContent = "Copy Script";
+                }, 1500);
+            });
         }
 
         // Page switching
@@ -631,9 +641,7 @@
         const ctx = canvas.getContext('2d');
 
         let particleCount = 100;
-        if (window.innerWidth <= 768) {
-            particleCount = 40;
-        }
+        if (window.innerWidth <= 768) particleCount = 40;
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
@@ -641,11 +649,8 @@
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            if (window.innerWidth <= 768) {
-                particleCount = 40;
-            } else {
-                particleCount = 100;
-            }
+            if (window.innerWidth <= 768) particleCount = 40;
+            else particleCount = 100;
             initParticles();
         });
 
@@ -777,7 +782,6 @@
                     document.getElementById("feedbackInput").value = "";
                     lastSubmitTime = Date.now();
                     updateSubmitButton();
-                    setInterval(updateSubmitButton, 1000);
                 } else {
                     statusMessage.textContent = "Error sending feedback. Try again later.";
                     statusMessage.style.color = "#ff6666";
@@ -789,7 +793,7 @@
             });
         }
 
-        // Call updateSubmitButton every second
+        // Auto-update submit button every second
         setInterval(updateSubmitButton, 1000);
     </script>
 </body>
