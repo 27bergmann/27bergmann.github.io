@@ -182,41 +182,40 @@
         }
         .feature-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Up to 3 per row */
+            gap: 16px; /* Bigger spacing */
         }
         .feature-box {
-            padding: 14px;
+            padding: 18px; /* Bigger padding for larger look */
             background: linear-gradient(180deg, #120000, #080000);
-            border-radius: 12px;
+            border-radius: 16px; /* Slightly rounder */
             border: 1px solid rgba(255,0,0,.1);
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 13px;
+            gap: 12px;
+            font-size: 14px; /* Slightly bigger font */
             text-decoration: none;
             color: white;
             transition: all .3s ease;
             cursor: pointer;
+            min-height: 70px; /* Taller cards */
         }
         .feature-box:hover {
             background: linear-gradient(180deg, #1a0000, #0a0000);
             border-color: rgba(255,0,0,.3);
             transform: translateY(-2px);
         }
-        .feature-box svg, .feature-box img {
-            width: 20px;
-            height: 20px;
+        .feature-box img {
+            width: 24px; /* Slightly bigger icon for visibility */
+            height: 24px;
             flex-shrink: 0;
-            border-radius: 4px;
-            overflow: hidden;
+            border-radius: 6px;
             object-fit: cover;
         }
-        .feature-box.secure svg {
-            stroke: #7dff7d;
-            fill: none;
-        }
-        .feature-box.opensource svg {
+        .feature-box svg {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
             stroke: #d4514a;
             fill: none;
         }
@@ -227,16 +226,17 @@
         .feature-title {
             font-weight: 600;
             margin-bottom: 2px;
+            font-size: 15px; /* Bigger title */
         }
         .feature-desc {
             opacity: .6;
-            font-size: 11px;
+            font-size: 12px;
         }
         .status-badge {
             margin-left: auto;
-            padding: 4px 10px;
-            border-radius: 10px;
-            font-size: 11px;
+            padding: 6px 12px; /* Bigger badge */
+            border-radius: 12px;
+            font-size: 12px;
             font-weight: 600;
         }
         .status-working {
@@ -250,7 +250,7 @@
             border: 1px solid rgba(255,200,0,.3);
         }
 
-        /* Games page - same grid */
+        /* Games page */
         .back-btn {
             display: inline-flex;
             align-items: center;
@@ -294,7 +294,7 @@
     </style>
 </head>
 <body>
-    <!-- Main Hub Page -->
+    <!-- Main Hub Page (unchanged) -->
     <div id="mainPage" class="container page active">
         <div class="logo-title">
             <h1 class="title" id="title"></h1>
@@ -401,7 +401,7 @@
 
         <div class="feature-grid">
             <a href="https://www.roblox.com/games/18856160616" target="_blank" class="feature-box opensource">
-                <img src="https://tr.rbxcdn.com/180DAY-3c292ac444be6b9a2f1af797629a869c/768/432/Image/Webp/noFilter" alt="Undead Defense Icon" loading="lazy">
+                <img src="https://tr.rbxcdn.com/30DAY-150x150/18856160616/Png" alt="Undead Defense Icon" loading="lazy">
                 <div class="feature-text">
                     <div class="feature-title">Undead Defense</div>
                     <div class="feature-desc"></div>
@@ -410,7 +410,7 @@
             </a>
 
             <a href="https://www.roblox.com/games/12177325772" target="_blank" class="feature-box opensource">
-                <img src="https://tr.rbxcdn.com/180DAY-ee680be33935a96f86396dbfcd3bcfc8/768/432/Image/Webp/noFilter" alt="FIFA Super Soccer! Icon" loading="lazy">
+                <img src="https://tr.rbxcdn.com/30DAY-150x150/12177325772/Png" alt="FIFA Super Soccer! Icon" loading="lazy">
                 <div class="feature-text">
                     <div class="feature-title">FIFA Super Soccer!</div>
                     <div class="feature-desc"></div>
