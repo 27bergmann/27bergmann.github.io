@@ -97,6 +97,24 @@
             border: 1px solid rgba(255,0,0,.15);
             color: #d4a574;
         }
+        .script-box::-webkit-scrollbar {
+            height: 8px;
+        }
+        .script-box::-webkit-scrollbar-track {
+            background: transparent;
+            border-radius: 10px;
+        }
+        .script-box::-webkit-scrollbar-thumb {
+            background: rgba(255,0,0,.3);
+            border-radius: 10px;
+        }
+        .script-box::-webkit-scrollbar-thumb:hover {
+            background: rgba(255,0,0,.5);
+        }
+        .script-box {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255,0,0,.3) transparent;
+        }
         .copy-btn {
             width: 100%;
             padding: 14px;
@@ -117,6 +135,9 @@
         .copy-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 25px rgba(255,0,0,.6);
+        }
+        .copy-btn:active {
+            transform: translateY(0);
         }
         .info {
             margin-top: 14px;
@@ -154,6 +175,11 @@
             width: 24px;
             height: 24px;
         }
+        .social-link svg path,
+        .social-link svg polyline {
+            fill: #d4514a;
+            stroke: #d4514a;
+        }
         .feature-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -183,6 +209,14 @@
             height: 20px;
             flex-shrink: 0;
         }
+        .feature-box.secure svg {
+            stroke: #7dff7d;
+            fill: none;
+        }
+        .feature-box.opensource svg {
+            stroke: #d4514a;
+            fill: none;
+        }
         .feature-text {
             text-align: left;
         }
@@ -195,7 +229,7 @@
             font-size: 11px;
         }
 
-        /* Games Page */
+        /* Games Page Styles - Matched exactly to original */
         .back-btn {
             display: inline-flex;
             align-items: center;
@@ -218,72 +252,72 @@
         }
         .games-list {
             display: grid;
-            gap: 16px;
+            gap: 12px;
         }
-        .game-card {
+        .feature-box.game {
+            padding: 14px;
             background: linear-gradient(180deg, #120000, #080000);
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid rgba(255,0,0,.15);
-            box-shadow: 0 0 20px rgba(255,0,0,.1);
-            transition: all .3s ease;
-        }
-        .game-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 0 30px rgba(255,0,0,.3);
-            border-color: rgba(255,0,0,.4);
-        }
-        .game-image {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
-        .game-info {
-            padding: 16px;
-            text-align: left;
-        }
-        .game-name {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-        .game-status {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-        .status-working { background: rgba(0,255,0,.15); color: #7dff7d; border: 1px solid rgba(0,255,0,.3); }
-        .status-development { background: rgba(255,200,0,.15); color: #ffcc00; border: 1px solid rgba(255,200,0,.3); }
-        .game-link {
-            display: block;
-            margin-top: 12px;
-            padding: 10px;
-            background: linear-gradient(135deg, #ff0000, #b30000);
-            border-radius: 10px;
-            text-decoration: none;
+            border-radius: 12px;
+            border: 1px solid rgba(255,0,0,.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
             color: white;
-            font-weight: 600;
-            font-size: 14px;
-            text-align: center;
             transition: all .3s ease;
         }
-        .game-link:hover {
+        .feature-box.game:hover {
+            background: linear-gradient(180deg, #1a0000, #0a0000);
+            border-color: rgba(255,0,0,.3);
             transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(255,0,0,.5);
+        }
+        .feature-box.game svg {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            stroke: #d4514a;
+            fill: none;
+        }
+        .status-badge {
+            margin-left: auto;
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .status-working {
+            background: rgba(0,255,0,.15);
+            color: #7dff7d;
+            border: 1px solid rgba(0,255,0,.3);
+        }
+        .status-development {
+            background: rgba(255,200,0,.15);
+            color: #ffcc00;
+            border: 1px solid rgba(255,200,0,.3);
         }
 
         .page { display: none; }
-        .page.active { display: block; }
+        .page.active { display: block; animation: fadeIn 0.6s ease; }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        @media (max-width: 480px) { .title { font-size: 38px; } }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @media (max-width: 480px) {
+            .title {
+                font-size: 38px;
+            }
+            .social-links {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
     </style>
 </head>
 <body>
-
     <!-- Main Hub Page -->
     <div id="mainPage" class="container page active">
         <div class="logo-title">
@@ -332,7 +366,7 @@
         </div>
         <div class="feature-grid">
             <div class="feature-box secure">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#7dff7d" stroke-width="2">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                 </svg>
                 <div class="feature-text">
@@ -374,7 +408,7 @@
         </div>
     </div>
 
-    <!-- Supported Games Page -->
+    <!-- Supported Games Page - Styled exactly like feature-grid -->
     <div id="gamesPage" class="container page">
         <button class="back-btn" onclick="showMain()">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -389,26 +423,28 @@
         <div class="line"></div>
         <p class="subtitle">List of games currently supported by Berg Hub</p>
 
-        <div class="games-list">
-            <!-- Undead Defense -->
-            <div class="game-card">
-                <img src="https://tr.rbxcdn.com/30DAY-Thumbnails/18856160616/512/512/ImagePng" alt="Undead Defense" class="game-image">
-                <div class="game-info">
-                    <div class="game-name">Undead Defense</div>
-                    <span class="game-status status-working">Working</span>
-                    <a href="https://www.roblox.com/games/18856160616" target="_blank" class="game-link">Open Game</a>
+        <div class="games-list feature-grid">
+            <a href="https://www.roblox.com/games/18856160616" target="_blank" class="feature-box game opensource">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                </svg>
+                <div class="feature-text">
+                    <div class="feature-title">Undead Defense</div>
+                    <div class="feature-desc">Working</div>
                 </div>
-            </div>
+                <span class="status-badge status-working">Working</span>
+            </a>
 
-            <!-- FIFA Super Soccer! -->
-            <div class="game-card">
-                <img src="https://tr.rbxcdn.com/30DAY-Thumbnails/12177325772/512/512/ImagePng" alt="FIFA Super Soccer!" class="game-image">
-                <div class="game-info">
-                    <div class="game-name">FIFA Super Soccer!</div>
-                    <span class="game-status status-development">In-Development</span>
-                    <a href="https://www.roblox.com/games/12177325772" target="_blank" class="game-link">Open Game</a>
+            <a href="https://www.roblox.com/games/12177325772" target="_blank" class="feature-box game opensource">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                </svg>
+                <div class="feature-text">
+                    <div class="feature-title">FIFA Super Soccer!</div>
+                    <div class="feature-desc">In-Development</div>
                 </div>
-            </div>
+                <span class="status-badge status-development">In-Development</span>
+            </a>
         </div>
     </div>
 
