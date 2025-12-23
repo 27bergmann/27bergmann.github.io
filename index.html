@@ -211,12 +211,8 @@
             border-radius: 4px;
             object-fit: cover;
         }
-        .feature-box.secure svg {
-            stroke: #7dff7d;
-            fill: none;
-        }
-        .feature-box.opensource svg {
-            stroke: #d4514a;
+        .feature-box.feedback svg {
+            stroke: #ffcc00;
             fill: none;
         }
         .feature-text {
@@ -429,15 +425,6 @@
             </a>
         </div>
         <div class="feature-grid">
-            <div class="feature-box secure">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                </svg>
-                <div class="feature-text">
-                    <div class="feature-title">Secure</div>
-                    <div class="feature-desc">Protected</div>
-                </div>
-            </div>
             <a href="https://junkie-development.de/overview/berghub" target="_blank" class="feature-box opensource">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
                     <circle cx="7" cy="7" r="4"/>
@@ -469,6 +456,17 @@
                     <div class="feature-desc">Check available games</div>
                 </div>
             </div>
+            <a href="https://discord.com/api/webhooks/1452857867324620881/oP9x7OtJO2aRjV-_hh2T2grquqiIezidbZPlx1MnXZZG-s-fHP2ocUH4hzXQMQD3OpaV" target="_blank" class="feature-box feedback">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    <path d="M9 9h6"/>
+                    <path d="M9 13h6"/>
+                </svg>
+                <div class="feature-text">
+                    <div class="feature-title">Feedback</div>
+                    <div class="feature-desc">Send suggestions & reports</div>
+                </div>
+            </a>
         </div>
 
         <div class="footer-info">
@@ -514,7 +512,7 @@
         </div>
     </div>
 
-    <!-- CHANGE THIS SRC TO YOUR OWN MUSIC URL -->
+    <!-- CHANGE THIS TO YOUR MUSIC URL -->
     <audio id="bgMusic" loop>
         <source src="https://files.catbox.moe/cjqi6m.mp3" type="audio/mpeg">
         Your browser does not support audio.
@@ -638,7 +636,6 @@
         const musicText = document.getElementById('musicText');
         let isPlaying = false;
 
-        // Try to play on any user interaction (click or touch)
         document.body.addEventListener('click', startMusic, { once: true });
         document.body.addEventListener('touchstart', startMusic, { once: true });
 
@@ -663,7 +660,6 @@
             }
         }
 
-        // Initial button text
         musicText.textContent = 'Mute Music';
     </script>
 </body>
