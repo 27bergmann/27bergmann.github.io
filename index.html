@@ -5,13 +5,11 @@
     <title>Berg Hub</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Improved favicon declarations -->
+    <!-- Multiple favicon declarations for maximum compatibility -->
     <link rel="icon" href="https://files.catbox.moe/r81dz4.png" type="image/png">
     <link rel="shortcut icon" href="https://files.catbox.moe/r81dz4.png" type="image/png">
     <link rel="apple-touch-icon" href="https://files.catbox.moe/r81dz4.png">
     <link rel="icon" type="image/png" sizes="32x32" href="https://files.catbox.moe/r81dz4.png">
-    
-    <!-- Optional: Helps with mobile theme -->
     <meta name="theme-color" content="#1a0000">
 
     <style>
@@ -214,10 +212,21 @@
             border-color: rgba(255,0,0,.3);
             transform: translateY(-2px);
         }
+        .feature-box img,
         .feature-box svg {
             width: 20px;
             height: 20px;
             flex-shrink: 0;
+            border-radius: 4px;
+            object-fit: cover;
+        }
+        .feature-box.secure svg {
+            stroke: #7dff7d;
+            fill: none;
+        }
+        .feature-box.opensource svg {
+            stroke: #d4514a;
+            fill: none;
         }
         .feature-text {
             text-align: left;
@@ -231,54 +240,6 @@
             opacity: .6;
             font-size: 11px;
         }
-
-        /* Feedback Page Styles */
-        .feedback-info {
-            margin: 20px 0;
-            opacity: 0.85;
-            font-size: 15px;
-            line-height: 1.5;
-        }
-        .feedback-input {
-            width: 100%;
-            padding: 16px;
-            background: #0a0000;
-            border: 1px solid rgba(255,0,0,.15);
-            border-radius: 14px;
-            color: white;
-            font-size: 14px;
-            margin: 20px 0;
-            min-height: 120px;
-            resize: vertical;
-        }
-        .submit-btn {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 14px;
-            background: linear-gradient(135deg, #ff0000, #b30000);
-            color: white;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(255,0,0,.4);
-            transition: all .3s ease;
-        }
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(255,0,0,.6);
-        }
-        .submit-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-        .status-message {
-            margin-top: 15px;
-            font-size: 14px;
-            opacity: 0.9;
-        }
-
         .games-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -338,7 +299,6 @@
             color: #ffcc00;
             border: 1px solid rgba(255,200,0,.3);
         }
-
         .back-btn {
             display: inline-flex;
             align-items: center;
@@ -359,10 +319,8 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(255,0,0,.6);
         }
-
         .page { display: none; }
         .page.active { display: block; animation: fadeIn 0.6s ease; }
-
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -375,9 +333,6 @@
             .title {
                 font-size: 38px;
             }
-            .social-links {
-                grid-template-columns: repeat(3, 1fr);
-            }
             .games-grid {
                 grid-template-columns: 1fr;
             }
@@ -385,7 +340,6 @@
                 padding: 20px;
             }
         }
-
         #snowCanvas {
             position: fixed;
             top: 0;
@@ -396,7 +350,6 @@
             z-index: -1;
             opacity: 0.7;
         }
-
         .footer-info {
             margin-top: 30px;
             font-size: 13px;
@@ -477,42 +430,28 @@
         </div>
         <div class="feature-grid">
             <div class="feature-box secure" onclick="showFeedback()">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                    <path d="M9 9h6"/>
-                    <path d="M9 13h6"/>
-                </svg>
+                <img src="https://files.catbox.moe/r81dz4.png" alt="Feedback Icon">
                 <div class="feature-text">
                     <div class="feature-title">Feedback</div>
                     <div class="feature-desc">Send suggestions & reports</div>
                 </div>
             </div>
             <a href="https://junkie-development.de/overview/berghub" target="_blank" class="feature-box opensource">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-                    <circle cx="7" cy="7" r="4"/>
-                    <path d="M10.5 9.5L20 19M14 14l1 1M17 17l1 1"/>
-                </svg>
+                <img src="https://files.catbox.moe/r81dz4.png" alt="Berg Hub Icon">
                 <div class="feature-text">
                     <div class="feature-title">Berg Hub</div>
                     <div class="feature-desc">Key System</div>
                 </div>
             </a>
             <a href="https://weao.xyz" target="_blank" class="feature-box opensource">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                    <line x1="12" y1="8" x2="12" y2="16"/>
-                    <line x1="8" y1="12" x2="16" y2="12"/>
-                </svg>
+                <img src="https://files.catbox.moe/r81dz4.png" alt="Executor Icon">
                 <div class="feature-text">
                     <div class="feature-title">Supported Executor</div>
                     <div class="feature-desc">Check compatibility</div>
                 </div>
             </a>
             <div class="feature-box opensource" onclick="showGames()">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-                    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
-                    <circle cx="12" cy="12" r="3"/>
-                </svg>
+                <img src="https://files.catbox.moe/r81dz4.png" alt="Games Icon">
                 <div class="feature-text">
                     <div class="feature-title">Supported Games</div>
                     <div class="feature-desc">Check available games</div>
@@ -537,13 +476,11 @@
             </svg>
             Back to Hub
         </button>
-
         <div class="logo-title">
             <h1 class="title">Supported Games</h1>
         </div>
         <div class="line"></div>
         <p class="subtitle">List of games currently supported by Berg Hub</p>
-
         <div class="games-grid">
             <a href="https://www.roblox.com/games/18856160616" target="_blank" class="game-card">
                 <img src="https://tr.rbxcdn.com/180DAY-3c292ac444be6b9a2f1af797629a869c/768/432/Image/Webp/noFilter" alt="Undead Defense Icon" loading="lazy">
@@ -552,7 +489,6 @@
                 </div>
                 <span class="game-status status-working">Working</span>
             </a>
-
             <a href="https://www.roblox.com/games/12177325772" target="_blank" class="game-card">
                 <img src="https://tr.rbxcdn.com/180DAY-ee680be33935a96f86396dbfcd3bcfc8/768/432/Image/Webp/noFilter" alt="FIFA Super Soccer! Icon" loading="lazy">
                 <div class="game-text">
@@ -571,17 +507,13 @@
             </svg>
             Back to Hub
         </button>
-
         <div class="logo-title">
             <h1 class="title">Feedback</h1>
         </div>
         <div class="line"></div>
         <p class="subtitle">Feedback Information</p>
-
         <textarea id="feedbackInput" class="feedback-input" placeholder="Type your feedback here..."></textarea>
-
         <button id="submitBtn" class="submit-btn" onclick="submitFeedback()">Submit Feedback</button>
-
         <p id="statusMessage" class="status-message"></p>
     </div>
 
@@ -627,7 +559,6 @@
             document.getElementById("feedbackPage").classList.add("active");
             document.getElementById("feedbackInput").value = '';
             document.getElementById("statusMessage").textContent = '';
-            updateSubmitButton();
         }
 
         function showMain() {
@@ -636,26 +567,20 @@
             document.getElementById("mainPage").classList.add("active");
         }
 
-        // Snow Particle Effect - Mobile optimized
+        // Snow Particle Effect
         const canvas = document.getElementById('snowCanvas');
         const ctx = canvas.getContext('2d');
-
-        let particleCount = 100;
-        if (window.innerWidth <= 768) particleCount = 40;
-
+        let particleCount = window.innerWidth <= 768 ? 40 : 100;
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            if (window.innerWidth <= 768) particleCount = 40;
-            else particleCount = 100;
-            initParticles();
+            particleCount = window.innerWidth <= 768 ? 40 : 100;
         });
 
         const particles = [];
-
         class Particle {
             constructor() {
                 this.x = Math.random() * canvas.width;
@@ -665,50 +590,37 @@
                 this.speedY = Math.random() * 0.8 + 0.3;
                 this.opacity = Math.random() * 0.4 + 0.2;
             }
-
             update() {
                 this.x += this.speedX;
                 this.y += this.speedY;
-
                 if (this.y > canvas.height) {
                     this.y = -10;
                     this.x = Math.random() * canvas.width;
                 }
-                if (this.x > canvas.width || this.x < 0) {
-                    this.speedX *= -1;
-                }
+                if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
             }
-
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                ctx.fillStyle = `rgba(255,255,255,${this.opacity})`;
                 ctx.shadowBlur = 8;
-                ctx.shadowColor = "rgba(255, 255, 255, 0.6)";
+                ctx.shadowColor = "rgba(255,255,255,0.6)";
                 ctx.fill();
             }
         }
-
         function initParticles() {
             particles.length = 0;
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
+            for (let i = 0; i < particleCount; i++) particles.push(new Particle());
         }
-
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
+            particles.forEach(p => { p.update(); p.draw(); });
             requestAnimationFrame(animate);
         }
-
         initParticles();
         animate();
 
-        // Background Music
+        // Music
         const music = document.getElementById('bgMusic');
         const musicIcon = document.getElementById('musicIcon');
         const musicText = document.getElementById('musicText');
@@ -737,64 +649,7 @@
                 musicIcon.innerHTML = '<path d="M9 18V5l12-2v13M9 18c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 9l12-2"/>';
             }
         }
-
         musicText.textContent = 'Mute Music';
-
-        // Feedback submission with 60-second cooldown
-        const webhookURL = "https://discord.com/api/webhooks/1452857867324620881/oP9x7OtJO2aRjV-_hh2T2grquqiIezidbZPlx1MnXZZG-s-fHP2ocUH4hzXQMQD3OpaV";
-        const submitBtn = document.getElementById("submitBtn");
-        const statusMessage = document.getElementById("statusMessage");
-        let lastSubmitTime = 0;
-
-        function updateSubmitButton() {
-            const now = Date.now();
-            const timeLeft = 60 - Math.floor((now - lastSubmitTime) / 1000);
-            if (timeLeft > 0) {
-                submitBtn.disabled = true;
-                submitBtn.textContent = `Wait ${timeLeft}s`;
-            } else {
-                submitBtn.disabled = false;
-                submitBtn.textContent = "Submit Feedback";
-            }
-        }
-
-        function submitFeedback() {
-            const input = document.getElementById("feedbackInput").value.trim();
-            if (input === "") {
-                statusMessage.textContent = "Please enter some feedback!";
-                statusMessage.style.color = "#ff6666";
-                return;
-            }
-
-            const payload = {
-                content: "**New Feedback from Berg Hub website**\n\n" + input
-            };
-
-            fetch(webhookURL, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload)
-            })
-            .then(response => {
-                if (response.ok) {
-                    statusMessage.textContent = "Feedback sent successfully! Thank you ❤️";
-                    statusMessage.style.color = "#7dff7d";
-                    document.getElementById("feedbackInput").value = "";
-                    lastSubmitTime = Date.now();
-                    updateSubmitButton();
-                } else {
-                    statusMessage.textContent = "Error sending feedback. Try again later.";
-                    statusMessage.style.color = "#ff6666";
-                }
-            })
-            .catch(() => {
-                statusMessage.textContent = "Error sending feedback. Try again later.";
-                statusMessage.style.color = "#ff6666";
-            });
-        }
-
-        // Auto-update submit button every second
-        setInterval(updateSubmitButton, 1000);
     </script>
 </body>
 </html>
