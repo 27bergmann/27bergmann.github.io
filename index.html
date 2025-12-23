@@ -28,21 +28,7 @@
             animation: fadeIn 1s ease;
         }
         .logo-title {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
             margin-bottom: 8px;
-        }
-        .logo {
-            width: 60px;
-            height: 60px;
-            filter: drop-shadow(0 0 8px rgba(255,0,0,.8)) drop-shadow(0 0 25px rgba(255,0,0,.6));
-            animation: float 3s ease-in-out infinite;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
         }
         .title {
             font-size: 48px;
@@ -50,6 +36,12 @@
             color: white;
             text-shadow: 0 0 8px rgba(255,0,0,.8), 0 0 25px rgba(255,0,0,.6);
             letter-spacing: -1px;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
         .line {
             width: 140px;
@@ -248,10 +240,6 @@
             .title {
                 font-size: 38px;
             }
-            .logo {
-                width: 45px;
-                height: 45px;
-            }
             .social-links {
                 grid-template-columns: repeat(3, 1fr);
             }
@@ -261,7 +249,6 @@
 <body>
     <div class="container">
         <div class="logo-title">
-            <img class="logo" src="https://files.catbox.moe/r81dz4.png" alt="Berg Hub Logo" loading="lazy">
             <h1 class="title" id="title"></h1>
         </div>
         <div class="line"></div>
