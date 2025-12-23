@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Berg Hub</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="favicon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+    <div class="loader-ring"></div>
+    <span>Loading Berg Hub</span>
+</div>
+
+<!-- MAIN -->
+<div class="container fade hidden" id="app">
+
+    <h1 class="title" id="title"></h1>
+    <div class="line"></div>
+
+    <p class="subtitle" id="subtitle"></p>
+
+    <div class="card animated-border slide">
+
+        <div class="secure">
+            <span class="icon lock"></span>
+            <span id="secureText"></span>
+        </div>
+
+        <div class="script-header">
+            <span class="icon code"></span>
+            <span>Script</span>
+        </div>
+
+        <pre class="script-box" id="script"></pre>
+
+        <button onclick="copyScript()" id="copyBtn">
+            <span class="icon clipboard"></span>
+            <span id="copyText"></span>
+        </button>
+
+        <p class="info" id="info"></p>
+    </div>
+
+    <div class="socials">
+        <a href="https://discord.gg/YOUR" target="_blank">
+            <span class="icon discord"></span>
+        </a>
+        <a href="https://youtube.com" target="_blank">
+            <span class="icon youtube"></span>
+        </a>
+        <a href="https://scriptblox.com" target="_blank">
+            <span class="icon code"></span>
+        </a>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
