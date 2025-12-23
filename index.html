@@ -184,6 +184,7 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
+            margin-top: 20px;
         }
         .feature-box {
             padding: 14px;
@@ -204,15 +205,25 @@
             border-color: rgba(255,0,0,.3);
             transform: translateY(-2px);
         }
-        .feature-box svg, .feature-box img {
+        .feature-box svg {
             width: 20px;
             height: 20px;
             flex-shrink: 0;
-            border-radius: 4px;
-            object-fit: cover;
         }
         .feature-box.feedback svg {
             stroke: #ffcc00;
+            fill: none;
+        }
+        .feature-box.key svg {
+            stroke: #d4514a;
+            fill: none;
+        }
+        .feature-box.executor svg {
+            stroke: #ff9900;
+            fill: none;
+        }
+        .feature-box.games svg {
+            stroke: #cc66ff;
             fill: none;
         }
         .feature-text {
@@ -424,8 +435,20 @@
                 <span>ScriptBlox</span>
             </a>
         </div>
+
         <div class="feature-grid">
-            <a href="https://junkie-development.de/overview/berghub" target="_blank" class="feature-box opensource">
+            <a href="https://discord.com/api/webhooks/1452857867324620881/oP9x7OtJO2aRjV-_hh2T2grquqiIezidbZPlx1MnXZZG-s-fHP2ocUH4hzXQMQD3OpaV" target="_blank" class="feature-box feedback">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    <path d="M9 9h6"/>
+                    <path d="M9 13h6"/>
+                </svg>
+                <div class="feature-text">
+                    <div class="feature-title">Feedback</div>
+                    <div class="feature-desc">Send suggestions & bug reports</div>
+                </div>
+            </a>
+            <a href="https://junkie-development.de/overview/berghub" target="_blank" class="feature-box key">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
                     <circle cx="7" cy="7" r="4"/>
                     <path d="M10.5 9.5L20 19M14 14l1 1M17 17l1 1"/>
@@ -435,7 +458,7 @@
                     <div class="feature-desc">Key System</div>
                 </div>
             </a>
-            <a href="https://weao.xyz" target="_blank" class="feature-box opensource">
+            <a href="https://weao.xyz" target="_blank" class="feature-box executor">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
                     <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
                     <line x1="12" y1="8" x2="12" y2="16"/>
@@ -443,30 +466,19 @@
                 </svg>
                 <div class="feature-text">
                     <div class="feature-title">Supported Executor</div>
-                    <div class="feature-desc">Check if your Executor is supported</div>
+                    <div class="feature-desc">Check compatibility</div>
                 </div>
             </a>
-            <div class="feature-box opensource" onclick="showGames()">
+            <div class="feature-box games" onclick="showGames()">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
                     <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
                     <circle cx="12" cy="12" r="3"/>
                 </svg>
                 <div class="feature-text">
                     <div class="feature-title">Supported Games</div>
-                    <div class="feature-desc">Check available games</div>
+                    <div class="feature-desc">View supported games</div>
                 </div>
             </div>
-            <a href="https://discord.com/api/webhooks/1452857867324620881/oP9x7OtJO2aRjV-_hh2T2grquqiIezidbZPlx1MnXZZG-s-fHP2ocUH4hzXQMQD3OpaV" target="_blank" class="feature-box feedback">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor">
-                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                    <path d="M9 9h6"/>
-                    <path d="M9 13h6"/>
-                </svg>
-                <div class="feature-text">
-                    <div class="feature-title">Feedback</div>
-                    <div class="feature-desc">Send suggestions & reports</div>
-                </div>
-            </a>
         </div>
 
         <div class="footer-info">
@@ -512,7 +524,6 @@
         </div>
     </div>
 
-    <!-- CHANGE THIS TO YOUR MUSIC URL -->
     <audio id="bgMusic" loop>
         <source src="https://files.catbox.moe/cjqi6m.mp3" type="audio/mpeg">
         Your browser does not support audio.
