@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Berg Hub</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75'></text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75'>🔴</text></svg>">
     <style>
         * {
             box-sizing: border-box;
@@ -30,11 +30,30 @@
             animation: fadeIn 1s ease;
         }
 
+        .logo-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 8px;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            filter: drop-shadow(0 0 8px rgba(255,0,0,.8)) drop-shadow(0 0 25px rgba(255,0,0,.6));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
         .title {
             font-size: 48px;
             font-weight: 700;
             color: white;
-            margin-bottom: 8px;
             text-shadow: 0 0 8px rgba(255,0,0,.8), 0 0 25px rgba(255,0,0,.6);
             letter-spacing: -1px;
         }
@@ -99,7 +118,6 @@
             color: #d4a574;
         }
 
-        /* Fix scrollbar styling - make it transparent/match background */
         .script-box::-webkit-scrollbar {
             height: 8px;
         }
@@ -118,7 +136,6 @@
             background: rgba(255,0,0,.5);
         }
 
-        /* Firefox scrollbar */
         .script-box {
             scrollbar-width: thin;
             scrollbar-color: rgba(255,0,0,.3) transparent;
@@ -268,6 +285,10 @@
             .title {
                 font-size: 38px;
             }
+            .logo {
+                width: 45px;
+                height: 45px;
+            }
             .social-links {
                 grid-template-columns: repeat(3, 1fr);
             }
@@ -276,9 +297,14 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="title" id="title"></h1>
+        <div class="logo-title">
+            <svg class="logo" viewBox="0 0 100 100" xmlns="https://imgur.com/a/884WjSX">
+                <path d="M20,80 Q20,40 35,30 Q50,20 65,30 L65,45 Q55,38 45,45 Q38,50 38,60 Q38,68 45,73 Q52,78 60,75 Q68,72 70,65 L85,70 Q80,85 65,90 Q45,97 30,85 Q20,75 20,80 Z M65,20 Q75,25 78,35 L63,40 Q61,33 55,30 Q48,27 42,32 L35,20 Q50,15 65,20 Z" fill="white"/>
+            </svg>
+            <h1 class="title" id="title"></h1>
+        </div>
         <div class="line"></div>
-        <p class="subtitle" id="subtitle"></p>
+        <p class="subtitle">Roblox Scripts</p>
 
         <div class="card">
             <div class="secure-badge">
@@ -287,20 +313,20 @@
                     <path d="M12 17v-2"/>
                     <path d="M7 11V7a5 5 0 0110 0v4"/>
                 </svg>
-                <span id="secureText"></span>
+                <span>Secure Connection</span>
             </div>
 
-            <div class="script-box" id="script"></div>
+            <div class="script-box">loadstring(game:HttpGet("https://27bergmann.github.io/main"))()</div>
 
             <button class="copy-btn" onclick="copyScript()">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <rect x="9" y="9" width="13" height="13" rx="2"/>
                     <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
                 </svg>
-                <span id="copyText"></span>
+                <span id="copyText">Copy Script</span>
             </button>
 
-            <p class="info" id="info"></p>
+            <p class="info">Paste this script into your executor.</p>
         </div>
 
         <div class="social-links">
@@ -351,7 +377,7 @@
     </div>
 
     <script>
-        // Typewriter effect for title
+        // Typewriter effect
         const titleText = "Berg Hub";
         let i = 0;
         const title = document.getElementById("title");
@@ -365,42 +391,14 @@
         }
         typeTitle();
 
-        // Script content (obfuscated)
-        const encoded = "bG9hZHN0cmluZyhnYW1lOkh0dHBHZXQoImh0dHBzOi8vMjdiZXJnbWFubi5naXRodWIuaW8vbWFpbi5sdWEiKSkoKQ==";
-        document.getElementById("script").innerText = atob(encoded);
-
-        // Language detection
-        const lang = navigator.language.startsWith("id") ? "id" : "en";
-        const text = {
-            en: {
-                subtitle: "Platform Scripting | Roblox Executor",
-                secure: "Secure Connection",
-                copy: "Copy Script",
-                copied: "Copied!",
-                info: "Paste this script into your executor."
-            },
-            id: {
-                subtitle: "Platform Scripting | Eksekutor Roblox",
-                secure: "Koneksi Aman",
-                copy: "Salin Script",
-                copied: "Tersalin!",
-                info: "Tempel skrip ini ke eksekutor."
-            }
-        };
-
-        document.getElementById("subtitle").textContent = text[lang].subtitle;
-        document.getElementById("secureText").textContent = text[lang].secure;
-        document.getElementById("copyText").textContent = text[lang].copy;
-        document.getElementById("info").textContent = text[lang].info;
-
         // Copy function
         function copyScript() {
-            const scriptContent = document.getElementById("script").innerText;
+            const scriptContent = document.querySelector(".script-box").innerText;
             navigator.clipboard.writeText(scriptContent);
             const copyTextEl = document.getElementById("copyText");
-            copyTextEl.textContent = text[lang].copied;
+            copyTextEl.textContent = "Copied!";
             setTimeout(() => {
-                copyTextEl.textContent = text[lang].copy;
+                copyTextEl.textContent = "Copy Script";
             }, 1500);
         }
     </script>
