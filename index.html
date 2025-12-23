@@ -118,6 +118,11 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 25px rgba(255,0,0,.6);
         }
+        .info {
+            margin-top: 14px;
+            font-size: 13px;
+            opacity: .7;
+        }
         .social-links {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -190,7 +195,7 @@
             font-size: 11px;
         }
 
-        /* Games Page Styles */
+        /* Games Page */
         .back-btn {
             display: inline-flex;
             align-items: center;
@@ -203,10 +208,9 @@
             color: white;
             font-size: 14px;
             font-weight: 600;
-            text-decoration: none;
+            cursor: pointer;
             box-shadow: 0 4px 15px rgba(255,0,0,.4);
             transition: all .3s ease;
-            cursor: pointer;
         }
         .back-btn:hover {
             transform: translateY(-2px);
@@ -227,6 +231,7 @@
         .game-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 0 30px rgba(255,0,0,.3);
+            border-color: rgba(255,0,0,.4);
         }
         .game-image {
             width: 100%;
@@ -250,8 +255,7 @@
             font-weight: 500;
         }
         .status-working { background: rgba(0,255,0,.15); color: #7dff7d; border: 1px solid rgba(0,255,0,.3); }
-        .status-updating { background: rgba(255,200,0,.15); color: #ffcc00; border: 1px solid rgba(255,200,0,.3); }
-        .status-broken { background: rgba(255,100,100,.15); color: #ff6b6b; border: 1px solid rgba(255,100,100,.3); }
+        .status-development { background: rgba(255,200,0,.15); color: #ffcc00; border: 1px solid rgba(255,200,0,.3); }
         .game-link {
             display: block;
             margin-top: 12px;
@@ -263,30 +267,23 @@
             font-weight: 600;
             font-size: 14px;
             text-align: center;
+            transition: all .3s ease;
         }
         .game-link:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 15px rgba(255,0,0,.5);
         }
 
-        /* Hide/Show Sections */
         .page { display: none; }
-        .page.active { display: block; animation: fadeIn 0.6s ease; }
+        .page.active { display: block; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes slideUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        @media (max-width: 480px) {
-            .title { font-size: 38px; }
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @media (max-width: 480px) { .title { font-size: 38px; } }
     </style>
 </head>
 <body>
+
     <!-- Main Hub Page -->
     <div id="mainPage" class="container page active">
         <div class="logo-title">
@@ -315,11 +312,15 @@
         </div>
         <div class="social-links">
             <a href="https://discord.gg/ZRuJcQmaUJ" target="_blank" class="social-link">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                </svg>
                 <span>Discord</span>
             </a>
             <a href="https://www.youtube.com/@ManFaceScript" target="_blank" class="social-link">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
                 <span>YouTube</span>
             </a>
             <a href="https://scriptblox.com/u/ManFaceScript" target="_blank" class="social-link">
@@ -331,7 +332,9 @@
         </div>
         <div class="feature-grid">
             <div class="feature-box secure">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7dff7d" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
                 <div class="feature-text">
                     <div class="feature-title">Secure</div>
                     <div class="feature-desc">Protected</div>
@@ -380,30 +383,32 @@
             Back to Hub
         </button>
 
-        <h1 class="title">Supported Games</h1>
+        <div class="logo-title">
+            <h1 class="title">Supported Games</h1>
+        </div>
+        <div class="line"></div>
         <p class="subtitle">List of games currently supported by Berg Hub</p>
 
         <div class="games-list">
-            <!-- Add your games here -->
+            <!-- Undead Defense -->
             <div class="game-card">
-                <img src="https://tr.rbxcdn.com/30DAY-Thumbnails/1/512x512/Png/1424564f30f04d8c8f9d8f8f8f8f8f8f/Thumbnail" alt="Blox Fruits" class="game-image">
+                <img src="https://tr.rbxcdn.com/30DAY-Thumbnails/18856160616/512/512/ImagePng" alt="Undead Defense" class="game-image">
                 <div class="game-info">
-                    <div class="game-name">Blox Fruits</div>
+                    <div class="game-name">Undead Defense</div>
                     <span class="game-status status-working">Working</span>
-                    <a href="https://www.roblox.com/games/2753915549/Blox-Fruits" target="_blank" class="game-link">Open Game</a>
+                    <a href="https://www.roblox.com/games/18856160616" target="_blank" class="game-link">Open Game</a>
                 </div>
             </div>
 
+            <!-- FIFA Super Soccer! -->
             <div class="game-card">
-                <img src="https://tr.rbxcdn.com/30DAY-Thumbnails/1/512x512/Png/4d5b8e6f8f8f8f8f8f8f8f8f8f8f8f8f/Thumbnail" alt="Arsenal" class="game-image">
+                <img src="https://tr.rbxcdn.com/30DAY-Thumbnails/12177325772/512/512/ImagePng" alt="FIFA Super Soccer!" class="game-image">
                 <div class="game-info">
-                    <div class="game-name">Arsenal</div>
-                    <span class="game-status status-working">Working</span>
-                    <a href="https://www.roblox.com/games/286090429/Arsenal" target="_blank" class="game-link">Open Game</a>
+                    <div class="game-name">FIFA Super Soccer!</div>
+                    <span class="game-status status-development">In-Development</span>
+                    <a href="https://www.roblox.com/games/12177325772" target="_blank" class="game-link">Open Game</a>
                 </div>
             </div>
-
-            <!-- Add more games like this -->
         </div>
     </div>
 
@@ -421,16 +426,18 @@
         }
         typeTitle();
 
-        // Copy script
+        // Copy function
         function copyScript() {
             const scriptContent = document.querySelector(".script-box").innerText;
             navigator.clipboard.writeText(scriptContent);
             const copyTextEl = document.getElementById("copyText");
             copyTextEl.textContent = "Copied!";
-            setTimeout(() => { copyTextEl.textContent = "Copy Script"; }, 1500);
+            setTimeout(() => {
+                copyTextEl.textContent = "Copy Script";
+            }, 1500);
         }
 
-        // Switch pages
+        // Page switching
         function showGames() {
             document.getElementById("mainPage").classList.remove("active");
             document.getElementById("gamesPage").classList.add("active");
