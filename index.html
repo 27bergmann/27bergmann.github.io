@@ -15,7 +15,7 @@
 
         html {
             scrollbar-width: thin;
-            scrollbar-color: rgba(255,0,0,0.5) transparent;
+            scrollbar-color: rgba(255,50,50,0.6) transparent;
         }
 
         html::-webkit-scrollbar {
@@ -27,17 +27,13 @@
         }
 
         html::-webkit-scrollbar-thumb {
-            background: rgba(255,0,0,0.5);
+            background: rgba(255,50,50,0.6);
             border-radius: 5px;
-        }
-
-        html::-webkit-scrollbar-thumb:hover {
-            background: rgba(255,0,0,0.7);
         }
 
         body {
             min-height: 100vh;
-            background: radial-gradient(circle at top, #1a0000, #050000);
+            background: radial-gradient(circle at top, #1a0000, #000);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -48,147 +44,133 @@
 
         .container {
             width: 100%;
-            max-width: 480px;
+            max-width: 520px;
             text-align: center;
         }
 
         .logo-title {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .title {
-            font-size: 48px;
-            font-weight: 700;
-            color: white;
-            text-shadow: 0 0 8px rgba(255,0,0,.8), 0 0 25px rgba(255,0,0,.6);
-            letter-spacing: -1px;
+            font-size: 52px;
+            font-weight: 800;
+            color: #fff;
+            text-shadow: 0 0 12px rgba(255,40,40,0.95), 0 0 35px rgba(255,0,0,0.7);
+            letter-spacing: -2px;
             display: inline-block;
-            animation: float 3s ease-in-out infinite;
+            opacity: 0;
+            animation: titlePop 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards, float 4.5s ease-in-out infinite;
+        }
+
+        @keyframes titlePop {
+            0%   { opacity: 0; transform: scale(0.7) translateY(-30px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+            0%, 100% { transform: translateY(0); }
+            50%      { transform: translateY(-14px); }
         }
 
-        @keyframes slideInDown {
-            from { opacity: 0; transform: translateY(-30px); }
+        .line {
+            width: 160px;
+            height: 4px;
+            margin: 16px auto 24px;
+            background: linear-gradient(90deg, transparent, #ff2a2a, transparent);
+            box-shadow: 0 0 30px rgba(255,40,40,0.85);
+            border-radius: 2px;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: lineAppear 1.2s ease forwards 0.7s;
+        }
+
+        @keyframes lineAppear {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .subtitle {
+            opacity: 0.9;
+            margin-bottom: 32px;
+            font-size: 16px;
+            font-weight: 400;
+            letter-spacing: 1.2px;
+            opacity: 0;
+            animation: fadeInUp 1.1s ease forwards 0.9s;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(25px); }
             to   { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes slideInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to   { opacity: 1; }
-        }
-
-        @keyframes slideUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to   { transform: translateY(0); opacity: 1; }
         }
 
         .page {
             display: none;
-            animation: fadeIn 0.5s ease;
+            opacity: 0;
         }
 
         .page.active {
             display: block;
+            animation: fadeInPage 0.8s ease forwards;
         }
 
-        .page.slide-enter {
-            animation: slideInUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .page.slide-exit {
-            animation: slideInDown 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) reverse;
-        }
-
-        .line {
-            width: 140px;
-            height: 3px;
-            margin: 12px auto 20px;
-            background: linear-gradient(90deg, transparent, #ff0000, transparent);
-            box-shadow: 0 0 20px rgba(255,0,0,.8);
-            border-radius: 2px;
-            animation: slideInUp 0.8s ease 0.1s both;
-        }
-
-        .subtitle {
-            opacity: .85;
-            margin-bottom: 28px;
-            font-size: 15px;
-            font-weight: 400;
-            animation: slideInUp 0.8s ease 0.2s both;
+        @keyframes fadeInPage {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
         .card {
-            background: linear-gradient(180deg, #0f0000, #050000);
-            border-radius: 20px;
-            padding: 24px;
-            box-shadow: inset 0 0 30px rgba(0,0,0,.9), 0 0 25px rgba(255,0,0,.2);
-            border: 1px solid rgba(255,0,0,.1);
-            animation: slideUp .8s ease 0.3s both;
-            margin-bottom: 24px;
+            background: linear-gradient(145deg, #0f0000, #050000);
+            border-radius: 24px;
+            padding: 28px;
+            box-shadow: inset 0 0 40px rgba(0,0,0,0.92), 0 0 40px rgba(255,30,30,0.28);
+            border: 1px solid rgba(255,40,40,0.18);
+            margin-bottom: 32px;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: cardRise 1s ease forwards 1.1s;
+        }
+
+        @keyframes cardRise {
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .script-box {
-            margin: 18px 0;
-            padding: 16px;
+            margin: 22px 0;
+            padding: 20px;
             background: #0a0000;
-            border-radius: 14px;
-            font-size: 13px;
+            border-radius: 16px;
+            font-size: 14px;
             font-family: 'Courier New', monospace;
-            box-shadow: inset 0 0 18px rgba(255,0,0,.25);
+            box-shadow: inset 0 0 28px rgba(255,40,40,0.35);
             overflow-x: auto;
             text-align: left;
-            border: 1px solid rgba(255,0,0,.15);
-            color: #d4a574;
-        }
-
-        .script-box::-webkit-scrollbar {
-            height: 8px;
-        }
-
-        .script-box::-webkit-scrollbar-track {
-            background: transparent;
-            border-radius: 10px;
-        }
-
-        .script-box::-webkit-scrollbar-thumb {
-            background: rgba(255,0,0,.3);
-            border-radius: 10px;
-        }
-
-        .script-box::-webkit-scrollbar-thumb:hover {
-            background: rgba(255,0,0,.5);
+            border: 1px solid rgba(255,40,40,0.25);
+            color: #ff9999;
+            white-space: pre-wrap;
         }
 
         .copy-btn {
             width: 100%;
-            padding: 14px;
+            padding: 16px;
             border: none;
-            border-radius: 14px;
-            background: linear-gradient(135deg, #ff0000, #b30000);
+            border-radius: 16px;
+            background: linear-gradient(135deg, #ff2a2a, #b30000);
             color: white;
-            font-size: 15px;
-            font-weight: 600;
+            font-size: 16px;
+            font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 4px 20px rgba(255,0,0,.4);
-            transition: all .3s ease;
+            box-shadow: 0 6px 25px rgba(255,40,40,0.55);
+            transition: all .4s cubic-bezier(0.34, 1.56, 0.64, 1);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .copy-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(255,0,0,.6);
+            transform: translateY(-4px) scale(1.04);
+            box-shadow: 0 12px 40px rgba(255,40,40,0.75);
         }
 
         .copy-btn:active {
@@ -196,143 +178,166 @@
         }
 
         .info {
-            margin-top: 14px;
-            font-size: 13px;
-            opacity: .7;
+            margin-top: 16px;
+            font-size: 14px;
+            opacity: 0.8;
         }
 
         .social-links {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin-bottom: 20px;
-            animation: slideInUp 0.8s ease 0.4s both;
+            gap: 16px;
+            margin: 36px 0;
         }
 
         .social-link {
-            padding: 16px 12px;
-            background: linear-gradient(180deg, #120000, #080000);
-            border-radius: 14px;
+            padding: 18px 12px;
+            background: linear-gradient(145deg, #120000, #080000);
+            border-radius: 18px;
             text-decoration: none;
             color: white;
-            font-size: 13px;
-            font-weight: 500;
-            box-shadow: inset 0 0 15px rgba(0,0,0,.8), 0 0 10px rgba(255,0,0,.1);
-            border: 1px solid rgba(255,0,0,.1);
-            transition: all .3s ease;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.7), inset 0 0 15px rgba(255,40,40,0.12);
+            border: 1px solid rgba(255,40,40,0.18);
+            transition: all .4s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: socialPop 0.9s ease forwards;
+        }
+
+        .social-link:nth-child(1) { animation-delay: 1.3s; }
+        .social-link:nth-child(2) { animation-delay: 1.4s; }
+        .social-link:nth-child(3) { animation-delay: 1.5s; }
+
+        @keyframes socialPop {
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .social-link:hover {
-            background: linear-gradient(180deg, #1a0000, #0a0000);
-            border-color: rgba(255,0,0,.3);
-            transform: translateY(-2px);
-        }
-
-        .social-link svg {
-            width: 24px;
-            height: 24px;
+            transform: translateY(-6px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(255,40,40,0.6);
+            border-color: rgba(255,40,40,0.55);
         }
 
         .feature-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-top: 20px;
-            animation: slideInUp 0.8s ease 0.5s both;
+            gap: 16px;
+            margin-top: 36px;
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 520px) {
             .feature-grid {
                 grid-template-columns: 1fr;
             }
         }
 
         .feature-box {
-            padding: 14px;
-            background: linear-gradient(180deg, #120000, #080000);
-            border-radius: 14px;
-            border: 1px solid rgba(255,0,0,.1);
+            padding: 18px 16px;
+            background: linear-gradient(145deg, #120000, #080000);
+            border-radius: 18px;
+            border: 1px solid rgba(255,40,40,0.18);
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 13px;
+            gap: 16px;
+            font-size: 14px;
             text-decoration: none;
             color: white;
-            transition: all .3s ease;
+            transition: all .4s cubic-bezier(0.34, 1.56, 0.64, 1);
             cursor: pointer;
-            flex-direction: column;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: featureRise 1s ease forwards;
+        }
+
+        .feature-box:nth-child(1) { animation-delay: 1.7s; }
+        .feature-box:nth-child(2) { animation-delay: 1.8s; }
+        .feature-box:nth-child(3) { animation-delay: 1.9s; }
+        .feature-box:nth-child(4) { animation-delay: 2s; }
+
+        @keyframes featureRise {
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .feature-box:hover {
-            background: linear-gradient(180deg, #1a0000, #0a0000);
-            border-color: rgba(255,0,0,.3);
-            transform: translateY(-2px);
+            background: linear-gradient(145deg, #1a0000, #0f0000);
+            border-color: rgba(255,40,40,0.55);
+            transform: translateY(-6px) scale(1.04);
+            box-shadow: 0 12px 35px rgba(255,40,40,0.45);
         }
 
-        .feature-box svg {
-            width: 22px;
-            height: 22px;
+        .feature-icon {
+            width: 30px;
+            height: 30px;
             flex-shrink: 0;
-            stroke: #d4514a;
+            stroke: #ff6666;
             fill: none;
-            stroke-width: 2;
+            stroke-width: 2.2;
         }
 
         .feature-text {
-            text-align: center;
+            text-align: left;
             flex: 1;
         }
 
         .feature-title {
-            font-weight: 600;
-            margin-bottom: 2px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            font-size: 15px;
         }
 
         .feature-desc {
-            opacity: .6;
-            font-size: 11px;
+            opacity: 0.65;
+            font-size: 12px;
         }
 
         .games-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 20px;
-            margin-top: 20px;
+            margin-top: 24px;
         }
 
         .game-card {
             padding: 24px;
-            background: linear-gradient(180deg, #120000, #080000);
-            border-radius: 16px;
-            border: 1px solid rgba(255,0,0,.1);
+            background: linear-gradient(145deg, #120000, #080000);
+            border-radius: 18px;
+            border: 1px solid rgba(255,40,40,0.18);
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 18px;
             font-size: 15px;
             text-decoration: none;
             color: white;
-            transition: all .3s ease;
+            transition: all .4s ease;
             min-height: 100px;
-            animation: staggerIn 0.6s ease both;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: cardRise 1s ease forwards;
         }
 
+        .game-card:nth-child(1) { animation-delay: 1.2s; }
+        .game-card:nth-child(2) { animation-delay: 1.3s; }
+
         .game-card:hover {
-            background: linear-gradient(180deg, #1a0000, #0a0000);
-            border-color: rgba(255,0,0,.3);
-            transform: translateY(-4px);
+            background: linear-gradient(145deg, #1a0000, #0f0000);
+            border-color: rgba(255,40,40,0.55);
+            transform: translateY(-6px);
+            box-shadow: 0 12px 35px rgba(255,40,40,0.45);
         }
 
         .game-card img {
-            width: 60px;
-            height: 60px;
+            width: 64px;
+            height: 64px;
             flex-shrink: 0;
-            border-radius: 10px;
+            border-radius: 12px;
             object-fit: cover;
-            box-shadow: 0 0 15px rgba(255,0,0,.4);
+            box-shadow: 0 0 18px rgba(255,40,40,0.5);
         }
 
         .game-text {
@@ -341,7 +346,7 @@
         }
 
         .game-title {
-            font-weight: 600;
+            font-weight: 700;
             font-size: 18px;
             margin-bottom: 4px;
         }
@@ -351,56 +356,61 @@
             padding: 8px 16px;
             border-radius: 14px;
             font-size: 13px;
-            font-weight: 600;
+            font-weight: 700;
         }
 
         .status-working {
-            background: rgba(0,255,0,.15);
-            color: #7dff7d;
-            border: 1px solid rgba(0,255,0,.3);
+            background: rgba(0,255,100,.2);
+            color: #7fff7f;
+            border: 1px solid rgba(0,255,100,.45);
+            animation: pulseGreen 3s infinite ease-in-out;
+        }
+
+        @keyframes pulseGreen {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(0,255,100,0.5); }
+            50%      { box-shadow: 0 0 0 10px rgba(0,255,100,0); }
         }
 
         .status-development {
-            background: rgba(255,200,0,.15);
+            background: rgba(255,200,0,.2);
             color: #ffcc00;
-            border: 1px solid rgba(255,200,0,.3);
+            border: 1px solid rgba(255,200,0,.45);
         }
 
         .back-btn {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            margin-bottom: 24px;
-            padding: 10px 16px;
-            background: linear-gradient(135deg, #ff0000, #b30000);
+            gap: 10px;
+            margin-bottom: 28px;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #ff2a2a, #b30000);
             border: none;
-            border-radius: 12px;
+            border-radius: 14px;
             color: white;
-            font-size: 14px;
-            font-weight: 600;
+            font-size: 15px;
+            font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255,0,0,.4);
-            transition: all .3s ease;
-            animation: slideInDown 0.6s ease;
+            box-shadow: 0 6px 20px rgba(255,40,40,0.55);
+            transition: all .4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            animation: slideInDown 0.8s ease;
         }
 
         .back-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255,0,0,.6);
+            transform: translateY(-3px) scale(1.04);
+            box-shadow: 0 12px 35px rgba(255,40,40,0.75);
         }
 
         .feedback-input {
             width: 100%;
-            padding: 16px;
+            padding: 18px;
             background: #0a0000;
-            border: 1px solid rgba(255,0,0,.15);
-            border-radius: 14px;
+            border: 1px solid rgba(255,40,40,0.2);
+            border-radius: 16px;
             color: white;
             font-size: 14px;
-            margin: 20px 0;
+            margin: 24px 0;
             min-height: 160px;
             resize: vertical;
-            animation: slideUp 0.8s ease 0.3s both;
         }
 
         .feedback-input::placeholder {
@@ -409,42 +419,35 @@
 
         .char-counter {
             text-align: right;
-            font-size: 12px;
+            font-size: 13px;
             margin-top: 8px;
-            opacity: 0.7;
-            animation: slideInUp 0.8s ease 0.35s both;
+            opacity: 0.75;
         }
 
-        .char-counter.valid {
-            color: #7dff7d;
-        }
-
-        .char-counter.invalid {
-            color: #ff6b6b;
-        }
+        .char-counter.valid { color: #7fff7f; }
+        .char-counter.invalid { color: #ff6b6b; }
 
         .submit-btn {
             width: 100%;
-            padding: 14px;
+            padding: 16px;
             border: none;
-            border-radius: 14px;
-            background: linear-gradient(135deg, #ff0000, #b30000);
+            border-radius: 16px;
+            background: linear-gradient(135deg, #ff2a2a, #b30000);
             color: white;
-            font-size: 15px;
-            font-weight: 600;
+            font-size: 16px;
+            font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 4px 20px rgba(255,0,0,.4);
-            transition: all .3s ease;
+            box-shadow: 0 6px 25px rgba(255,40,40,0.55);
+            transition: all .4s cubic-bezier(0.34, 1.56, 0.64, 1);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            animation: slideUp 0.8s ease 0.4s both;
+            gap: 12px;
         }
 
         .submit-btn:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(255,0,0,.6);
+            transform: translateY(-4px) scale(1.04);
+            box-shadow: 0 12px 40px rgba(255,40,40,0.75);
         }
 
         .submit-btn:disabled {
@@ -453,55 +456,59 @@
         }
 
         .status-message {
-            margin-top: 15px;
-            padding: 14px;
-            border-radius: 12px;
+            margin-top: 18px;
+            padding: 16px;
+            border-radius: 14px;
             font-size: 14px;
-            opacity: 0.9;
+            opacity: 0.95;
             display: flex;
             align-items: center;
-            gap: 10px;
-            animation: scaleIn 0.4s ease;
+            gap: 12px;
+            animation: scaleIn 0.5s ease;
         }
 
         .status-success {
-            background: rgba(0,255,0,.15);
-            border: 1px solid rgba(0,255,0,.3);
-            color: #7dff7d;
+            background: rgba(0,255,100,.2);
+            border: 1px solid rgba(0,255,100,.45);
+            color: #7fff7f;
         }
 
         .status-error {
-            background: rgba(255,0,0,.15);
-            border: 1px solid rgba(255,0,0,.3);
+            background: rgba(255,40,40,.2);
+            border: 1px solid rgba(255,40,40,.45);
             color: #ff6b6b;
         }
 
         .status-sending {
-            background: rgba(255,200,0,.15);
-            border: 1px solid rgba(255,200,0,.3);
+            background: rgba(255,200,0,.2);
+            border: 1px solid rgba(255,200,0,.45);
             color: #ffcc00;
         }
 
+        @keyframes scaleIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to   { transform: scale(1); opacity: 0.95; }
+        }
+
         .footer-info {
-            margin-top: 30px;
+            margin-top: 40px;
             font-size: 13px;
-            opacity: 0.7;
+            opacity: 0.75;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px;
-            animation: slideInUp 0.8s ease 0.6s both;
+            gap: 14px;
         }
 
         .music-toggle {
-            padding: 10px 16px;
-            background: linear-gradient(180deg, #120000, #080000);
-            border-radius: 12px;
+            padding: 12px 20px;
+            background: linear-gradient(145deg, #120000, #080000);
+            border-radius: 14px;
             cursor: pointer;
-            border: 1px solid rgba(255,0,0,.2);
+            border: 1px solid rgba(255,40,40,0.25);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             transition: all .3s ease;
             color: white;
             font-size: 14px;
@@ -509,15 +516,16 @@
 
         .music-toggle:hover {
             background: #1a0000;
-            border-color: rgba(255,0,0,.4);
+            border-color: rgba(255,40,40,0.5);
+            transform: scale(1.05);
         }
 
         .music-toggle svg {
-            width: 18px;
-            height: 18px;
-            stroke: #d4514a;
+            width: 20px;
+            height: 20px;
+            stroke: #ff6666;
             fill: none;
-            stroke-width: 2;
+            stroke-width: 2.2;
         }
 
         #snowCanvas {
@@ -528,38 +536,31 @@
             height: 100%;
             pointer-events: none;
             z-index: -1;
-            opacity: 0.7;
+            opacity: 0.75;
         }
 
-        @media (max-width: 480px) {
-            .title {
-                font-size: 38px;
-            }
-            .social-links {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            .games-grid {
-                grid-template-columns: 1fr;
-            }
-            .game-card {
-                padding: 20px;
-            }
+        @media (max-width: 520px) {
+            .title { font-size: 42px; }
+            .social-links { grid-template-columns: repeat(3, 1fr); }
+            .games-grid { grid-template-columns: 1fr; }
+            .game-card { padding: 20px; }
         }
     </style>
 </head>
 <body>
     <canvas id="snowCanvas"></canvas>
 
-    <div id="mainPage" class="container page active slide-enter">
+    <div id="mainPage" class="container page active">
         <div class="logo-title">
             <h1 class="title" id="title"></h1>
         </div>
         <div class="line"></div>
         <p class="subtitle">Roblox Scripts</p>
+
         <div class="card">
             <div class="script-box">loadstring(game:HttpGet("https://27bergmann.github.io/main"))()</div>
             <button class="copy-btn" onclick="copyScript()">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                     <rect x="9" y="9" width="13" height="13" rx="2"/>
                     <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
                 </svg>
@@ -591,19 +592,19 @@
 
         <div class="feature-grid">
             <div class="feature-box" onclick="showFeedback()">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#d4514a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg class="feature-icon" viewBox="0 0 24 24">
                     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
                     <path d="M9 9h6"/>
                     <path d="M9 13h6"/>
                 </svg>
                 <div class="feature-text">
                     <div class="feature-title">Feedback</div>
-                    <div class="feature-desc">Send suggestions</div>
+                    <div class="feature-desc">Suggestions & Bug reports</div>
                 </div>
             </div>
 
             <a href="https://junkie-development.de/overview/berghub" target="_blank" class="feature-box">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#d4514a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg class="feature-icon" viewBox="0 0 24 24">
                     <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
                     <path d="M7 11V7a5 5 0 0110 0v4"/>
                 </svg>
@@ -614,26 +615,26 @@
             </a>
 
             <a href="https://weao.xyz" target="_blank" class="feature-box">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#d4514a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg class="feature-icon" viewBox="0 0 24 24">
                     <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
                     <line x1="12" y1="8" x2="12" y2="16"/>
                     <line x1="8" y1="12" x2="16" y2="12"/>
                 </svg>
                 <div class="feature-text">
                     <div class="feature-title">Supported Executor</div>
-                    <div class="feature-desc">Check compatibility</div>
+                    <div class="feature-desc">Compatibility list</div>
                 </div>
             </a>
 
             <div class="feature-box" onclick="showGames()">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#d4514a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg class="feature-icon" viewBox="0 0 24 24">
                     <path d="M6 9l6 6 6-6"/>
                     <path d="M12 3v12"/>
                     <circle cx="12" cy="19" r="2"/>
                 </svg>
                 <div class="feature-text">
                     <div class="feature-title">Supported Games</div>
-                    <div class="feature-desc">Check available</div>
+                    <div class="feature-desc">Available scripts</div>
                 </div>
             </div>
         </div>
@@ -651,7 +652,7 @@
     <!-- Games Page -->
     <div id="gamesPage" class="container page">
         <button class="back-btn" onclick="showMain()">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M19 12H5M12 19l-7-7 7-7"/>
             </svg>
             Back to Hub
@@ -682,7 +683,7 @@
     <!-- Feedback Page -->
     <div id="feedbackPage" class="container page">
         <button class="back-btn" onclick="showMain()">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M19 12H5M12 19l-7-7 7-7"/>
             </svg>
             Back to Hub
@@ -696,15 +697,15 @@
             <textarea id="feedbackInput" class="feedback-input" placeholder="Tell us what's on your mind...&#10;&#10;Examples:&#10;• Report a bug you encountered&#10;• Suggest a new game to support&#10;• Request a new feature&#10;• Share your experience" maxlength="1000" oninput="updateCharCounter()"></textarea>
             <div id="charCounter" class="char-counter">0 / 1000 characters</div>
             <button id="submitBtn" class="submit-btn" onclick="submitFeedback()">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <line x1="22" y1="2" x2="11" y2="13"/>
                     <polygon points="22 2 15 22 11 13 2 9 22 2"/>
                 </svg>
                 <span>Submit Feedback</span>
             </button>
             <div id="statusMessage"></div>
-            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,0,0,0.1);">
-                <p style="font-size: 13px; opacity: 0.7; line-height: 1.5;">
+            <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(255,40,40,0.15);">
+                <p style="font-size: 14px; opacity: 0.75; line-height: 1.6;">
                     Your feedback helps us improve Berg Hub. We read every submission and use your input to make the experience better for everyone.
                 </p>
             </div>
@@ -750,15 +751,17 @@
 
             setTimeout(() => {
                 from.classList.remove("slide-exit");
-                to.classList.add("active", "slide-enter");
-            }, 400);
+                to.classList.add("active");
+            }, 500);
         }
 
         function showGames()    { switchPage("mainPage", "gamesPage"); }
-        function showFeedback() { switchPage("mainPage", "feedbackPage"); 
-                                  document.getElementById("feedbackInput").value = '';
-                                  document.getElementById("statusMessage").textContent = '';
-                                  updateCharCounter(); }
+        function showFeedback() { 
+            switchPage("mainPage", "feedbackPage"); 
+            document.getElementById("feedbackInput").value = '';
+            document.getElementById("statusMessage").textContent = '';
+            updateCharCounter(); 
+        }
         function showMain() {
             const current = document.querySelector(".page.active");
             if (current.id === "gamesPage") switchPage("gamesPage", "mainPage");
@@ -794,10 +797,10 @@
 
             if (timeLeft > 0) {
                 btn.disabled = true;
-                btn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Wait ${timeLeft}s</span>`;
+                btn.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Wait ${timeLeft}s</span>`;
             } else {
                 btn.disabled = false;
-                btn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg><span>Submit Feedback</span>`;
+                btn.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg><span>Submit Feedback</span>`;
                 if (cooldownTimer) clearInterval(cooldownTimer);
             }
         }
@@ -812,7 +815,7 @@
                 return;
             }
 
-            status.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg><span>Sending...</span>';
+            status.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg><span>Sending...</span>';
             status.className = "status-message status-sending";
 
             fetch(WEBHOOK_URL, {
@@ -822,7 +825,7 @@
             })
             .then(r => {
                 if (r.ok) {
-                    status.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg><span>Feedback sent! Thank you.</span>';
+                    status.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg><span>Feedback sent! Thank you.</span>';
                     status.className = "status-message status-success";
                     document.getElementById("feedbackInput").value = "";
                     updateCharCounter();
@@ -834,7 +837,7 @@
                 }
             })
             .catch(() => {
-                status.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span>Error. Try again later.</span>';
+                status.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span>Error. Try again later.</span>';
                 status.className = "status-message status-error";
             });
         }
@@ -842,7 +845,7 @@
         // === SNOW EFFECT ===
         const canvas = document.getElementById('snowCanvas');
         const ctx = canvas.getContext('2d');
-        let particleCount = window.innerWidth <= 768 ? 40 : 100;
+        let particleCount = window.innerWidth <= 768 ? 50 : 120;
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
@@ -850,7 +853,7 @@
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            particleCount = window.innerWidth <= 768 ? 40 : 100;
+            particleCount = window.innerWidth <= 768 ? 50 : 120;
             initParticles();
         });
 
@@ -860,9 +863,9 @@
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 3 + 1;
-                this.speedX = Math.random() * 0.5 - 0.25;
-                this.speedY = Math.random() * 0.8 + 0.3;
+                this.size = Math.random() * 4 + 1;
+                this.speedX = Math.random() * 0.6 - 0.3;
+                this.speedY = Math.random() * 1 + 0.4;
                 this.opacity = Math.random() * 0.4 + 0.2;
             }
             update() {
@@ -878,8 +881,8 @@
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fillStyle = `rgba(255,255,255,${this.opacity})`;
-                ctx.shadowBlur = 8;
-                ctx.shadowColor = "rgba(255,255,255,0.6)";
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = "rgba(255,255,255,0.7)";
                 ctx.fill();
             }
         }
