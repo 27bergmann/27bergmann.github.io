@@ -232,7 +232,6 @@
             font-size: 11px;
         }
 
-        /* Games page */
         .games-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -340,7 +339,6 @@
             }
         }
 
-        /* Snow Canvas */
         #snowCanvas {
             position: fixed;
             top: 0;
@@ -352,7 +350,6 @@
             opacity: 0.7;
         }
 
-        /* Visitor Counter & Music Toggle */
         .footer-info {
             margin-top: 30px;
             font-size: 13px;
@@ -386,7 +383,6 @@
 <body>
     <canvas id="snowCanvas"></canvas>
 
-    <!-- Main Hub Page -->
     <div id="mainPage" class="container page active">
         <div class="logo-title">
             <h1 class="title" id="title"></h1>
@@ -475,19 +471,16 @@
             </div>
         </div>
 
-        <!-- Visitor Counter & Music Toggle -->
         <div class="footer-info">
-            <div>Visitors: <span id="visitorCount">Loading...</span></div>
             <div class="music-toggle" onclick="toggleMusic()">
                 <svg id="musicIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>
+                    <path d="M9 18V5l12-2v13M9 18c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 9l12-2"/>
                 </svg>
-                <span id="musicText">Play Music</span>
+                <span id="musicText">Mute Music</span>
             </div>
         </div>
     </div>
 
-    <!-- Supported Games Page -->
     <div id="gamesPage" class="container page">
         <button class="back-btn" onclick="showMain()">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -521,9 +514,9 @@
         </div>
     </div>
 
-    <!-- Background Music -->
+    <!-- CHANGE THIS SRC TO YOUR OWN MUSIC URL -->
     <audio id="bgMusic" loop>
-        <source src="https://files.catbox.moe/0r7q0v.mp3" type="audio/mpeg">
+        <source src="https://files.catbox.moe/cjqi6m.mp3" type="audio/mpeg">
         Your browser does not support audio.
     </audio>
 
@@ -639,21 +632,22 @@
         initParticles();
         animate();
 
-        // Visitor Counter (using CountAPI - free & simple)
-        fetch('https://api.countapi.xyz/hit/berghub-visitors/visit')
-            .then(res => res.json())
-            .then(data => {
-                document.getElementById('visitorCount').textContent = data.value.toLocaleString();
-            })
-            .catch(() => {
-                document.getElementById('visitorCount').textContent = 'N/A';
-            });
-
-        // Background Music Toggle
+        // Background Music - Auto-play on user interaction
         const music = document.getElementById('bgMusic');
         const musicIcon = document.getElementById('musicIcon');
         const musicText = document.getElementById('musicText');
         let isPlaying = false;
+
+        // Try to play on any user interaction (click or touch)
+        document.body.addEventListener('click', startMusic, { once: true });
+        document.body.addEventListener('touchstart', startMusic, { once: true });
+
+        function startMusic() {
+            music.play().catch(e => console.log("Auto-play prevented:", e));
+            isPlaying = true;
+            musicText.textContent = 'Mute Music';
+            musicIcon.innerHTML = '<path d="M9 18V5l12-2v13M9 18c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 9l12-2"/>';
+        }
 
         function toggleMusic() {
             if (isPlaying) {
@@ -664,17 +658,13 @@
             } else {
                 music.play();
                 isPlaying = true;
-                musicText.textContent = 'Pause Music';
+                musicText.textContent = 'Mute Music';
                 musicIcon.innerHTML = '<path d="M9 18V5l12-2v13M9 18c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 9l12-2"/>';
             }
         }
 
-        // Auto-play music on first user interaction (to bypass browser restrictions)
-        document.body.addEventListener('click', () => {
-            if (!isPlaying) {
-                music.play().catch(() => {});
-            }
-        }, { once: true });
+        // Initial button text
+        musicText.textContent = 'Mute Music';
     </script>
 </body>
 </html>
