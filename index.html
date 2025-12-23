@@ -97,24 +97,6 @@
             border: 1px solid rgba(255,0,0,.15);
             color: #d4a574;
         }
-        .script-box::-webkit-scrollbar {
-            height: 8px;
-        }
-        .script-box::-webkit-scrollbar-track {
-            background: transparent;
-            border-radius: 10px;
-        }
-        .script-box::-webkit-scrollbar-thumb {
-            background: rgba(255,0,0,.3);
-            border-radius: 10px;
-        }
-        .script-box::-webkit-scrollbar-thumb:hover {
-            background: rgba(255,0,0,.5);
-        }
-        .script-box {
-            scrollbar-width: thin;
-            scrollbar-color: rgba(255,0,0,.3) transparent;
-        }
         .copy-btn {
             width: 100%;
             padding: 14px;
@@ -135,9 +117,6 @@
         .copy-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 25px rgba(255,0,0,.6);
-        }
-        .copy-btn:active {
-            transform: translateY(0);
         }
         .info {
             margin-top: 14px;
@@ -175,11 +154,6 @@
             width: 24px;
             height: 24px;
         }
-        .social-link svg path,
-        .social-link svg polyline {
-            fill: #d4514a;
-            stroke: #d4514a;
-        }
         .feature-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -210,22 +184,6 @@
             height: 20px;
             flex-shrink: 0;
         }
-        .feature-box.feedback svg {
-            stroke: #ffcc00;
-            fill: none;
-        }
-        .feature-box.key svg {
-            stroke: #d4514a;
-            fill: none;
-        }
-        .feature-box.executor svg {
-            stroke: #ff9900;
-            fill: none;
-        }
-        .feature-box.games svg {
-            stroke: #cc66ff;
-            fill: none;
-        }
         .feature-text {
             text-align: left;
             flex: 1;
@@ -237,6 +195,53 @@
         .feature-desc {
             opacity: .6;
             font-size: 11px;
+        }
+
+        /* Feedback Page Styles */
+        .feedback-info {
+            margin: 20px 0;
+            opacity: 0.85;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+        .feedback-input {
+            width: 100%;
+            padding: 16px;
+            background: #0a0000;
+            border: 1px solid rgba(255,0,0,.15);
+            border-radius: 14px;
+            color: white;
+            font-size: 14px;
+            margin: 20px 0;
+            min-height: 120px;
+            resize: vertical;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #ff0000, #b30000);
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(255,0,0,.4);
+            transition: all .3s ease;
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(255,0,0,.6);
+        }
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .status-message {
+            margin-top: 15px;
+            font-size: 14px;
+            opacity: 0.9;
         }
 
         .games-grid {
@@ -437,18 +442,18 @@
         </div>
 
         <div class="feature-grid">
-            <a href="https://discord.com/api/webhooks/1452857867324620881/oP9x7OtJO2aRjV-_hh2T2grquqiIezidbZPlx1MnXZZG-s-fHP2ocUH4hzXQMQD3OpaV" target="_blank" class="feature-box feedback">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+            <div class="feature-box" onclick="showFeedback()">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor">
                     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
                     <path d="M9 9h6"/>
                     <path d="M9 13h6"/>
                 </svg>
                 <div class="feature-text">
                     <div class="feature-title">Feedback</div>
-                    <div class="feature-desc">Send suggestions & bug reports</div>
+                    <div class="feature-desc">Send suggestions & reports</div>
                 </div>
-            </a>
-            <a href="https://junkie-development.de/overview/berghub" target="_blank" class="feature-box key">
+            </div>
+            <a href="https://junkie-development.de/overview/berghub" target="_blank" class="feature-box">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
                     <circle cx="7" cy="7" r="4"/>
                     <path d="M10.5 9.5L20 19M14 14l1 1M17 17l1 1"/>
@@ -458,7 +463,7 @@
                     <div class="feature-desc">Key System</div>
                 </div>
             </a>
-            <a href="https://weao.xyz" target="_blank" class="feature-box executor">
+            <a href="https://weao.xyz" target="_blank" class="feature-box">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
                     <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
                     <line x1="12" y1="8" x2="12" y2="16"/>
@@ -469,7 +474,7 @@
                     <div class="feature-desc">Check compatibility</div>
                 </div>
             </a>
-            <div class="feature-box games" onclick="showGames()">
+            <div class="feature-box" onclick="showGames()">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
                     <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
                     <circle cx="12" cy="12" r="3"/>
@@ -491,6 +496,7 @@
         </div>
     </div>
 
+    <!-- Supported Games Page -->
     <div id="gamesPage" class="container page">
         <button class="back-btn" onclick="showMain()">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -522,6 +528,31 @@
                 <span class="game-status status-development">In-Development</span>
             </a>
         </div>
+    </div>
+
+    <!-- Feedback Page -->
+    <div id="feedbackPage" class="container page">
+        <button class="back-btn" onclick="showMain()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Back to Hub
+        </button>
+
+        <div class="logo-title">
+            <h1 class="title">Feedback</h1>
+        </div>
+        <div class="line"></div>
+        <p class="subtitle feedback-info">
+            Thank you for helping improve Berg Hub!<br>
+            Send your suggestions, bug reports, or any feedback below.
+        </p>
+
+        <textarea id="feedbackInput" class="feedback-input" placeholder="Type your feedback here..."></textarea>
+
+        <button id="submitBtn" class="submit-btn" onclick="submitFeedback()">Submit Feedback</button>
+
+        <p id="statusMessage" class="status-message"></p>
     </div>
 
     <audio id="bgMusic" loop>
@@ -559,8 +590,18 @@
             document.getElementById("mainPage").classList.remove("active");
             document.getElementById("gamesPage").classList.add("active");
         }
+
+        function showFeedback() {
+            document.getElementById("mainPage").classList.remove("active");
+            document.getElementById("feedbackPage").classList.add("active");
+            document.getElementById("feedbackInput").value = '';
+            document.getElementById("statusMessage").textContent = '';
+            updateSubmitButton();
+        }
+
         function showMain() {
             document.getElementById("gamesPage").classList.remove("active");
+            document.getElementById("feedbackPage").classList.remove("active");
             document.getElementById("mainPage").classList.add("active");
         }
 
@@ -641,7 +682,7 @@
         initParticles();
         animate();
 
-        // Background Music - Auto-play on user interaction
+        // Background Music
         const music = document.getElementById('bgMusic');
         const musicIcon = document.getElementById('musicIcon');
         const musicText = document.getElementById('musicText');
@@ -672,6 +713,63 @@
         }
 
         musicText.textContent = 'Mute Music';
+
+        // Feedback submission with 60-second cooldown
+        const webhookURL = "https://discord.com/api/webhooks/1452857867324620881/oP9x7OtJO2aRjV-_hh2T2grquqiIezidbZPlx1MnXZZG-s-fHP2ocUH4hzXQMQD3OpaV";
+        const submitBtn = document.getElementById("submitBtn");
+        const statusMessage = document.getElementById("statusMessage");
+        let lastSubmitTime = 0;
+
+        function updateSubmitButton() {
+            const now = Date.now();
+            const timeLeft = 60 - Math.floor((now - lastSubmitTime) / 1000);
+            if (timeLeft > 0) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = `Wait ${timeLeft}s`;
+            } else {
+                submitBtn.disabled = false;
+                submitBtn.textContent = "Submit Feedback";
+            }
+        }
+
+        function submitFeedback() {
+            const input = document.getElementById("feedbackInput").value.trim();
+            if (input === "") {
+                statusMessage.textContent = "Please enter some feedback!";
+                statusMessage.style.color = "#ff6666";
+                return;
+            }
+
+            const payload = {
+                content: "**New Feedback from Berg Hub website**\n\n" + input
+            };
+
+            fetch(webhookURL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            })
+            .then(response => {
+                if (response.ok) {
+                    statusMessage.textContent = "Feedback sent successfully! Thank you ❤️";
+                    statusMessage.style.color = "#7dff7d";
+                    document.getElementById("feedbackInput").value = "";
+                    lastSubmitTime = Date.now();
+                    updateSubmitButton();
+                    setInterval(updateSubmitButton, 1000);
+                    setTimeout(() => {
+                        updateSubmitButton();
+                    }, 60000);
+                } else {
+                    statusMessage.textContent = "Error sending feedback. Try again later.";
+                    statusMessage.style.color = "#ff6666";
+                }
+            })
+            .catch(() => {
+                statusMessage.textContent = "Error sending feedback. Try again later.";
+                statusMessage.style.color = "#ff6666";
+            });
+        }
     </script>
 </body>
 </html>
