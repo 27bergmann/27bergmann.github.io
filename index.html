@@ -232,7 +232,7 @@
             font-size: 11px;
         }
 
-        /* Games page - BIGGER cards */
+        /* Games page */
         .games-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -349,7 +349,7 @@
             height: 100%;
             pointer-events: none;
             z-index: -1;
-            opacity: 0.8;
+            opacity: 0.7;
         }
     </style>
 </head>
@@ -399,7 +399,7 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M7 8l-4 4 4 4M17 8l4 4-4 4M14 4l-4 16"/>
                 </svg>
-                <span>Scripts</span>
+                <span>ScriptBlox</span>
             </a>
         </div>
         <div class="feature-grid">
@@ -515,9 +515,16 @@
             document.getElementById("mainPage").classList.add("active");
         }
 
-        // Snow Particle Effect
+        // Snow Particle Effect - Mobile optimized
         const canvas = document.getElementById('snowCanvas');
         const ctx = canvas.getContext('2d');
+
+        let particleCount = 100; // Default for desktop
+
+        // Reduce particles and speed on mobile
+        if (window.innerWidth <= 768) {
+            particleCount = 40; // Fewer particles on mobile
+        }
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
@@ -525,19 +532,26 @@
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
+
+            // Re-adjust particle count on resize
+            if (window.innerWidth <= 768) {
+                particleCount = 40;
+            } else {
+                particleCount = 100;
+            }
+            initParticles(); // Re-init with new count
         });
 
         const particles = [];
-        const particleCount = 100; // Change this number for more/less snow
 
         class Particle {
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 4 + 1;
-                this.speedX = Math.random() * 1 - 0.5;
-                this.speedY = Math.random() * 1 + 0.5;
-                this.opacity = Math.random() * 0.5 + 0.3;
+                this.size = Math.random() * 3 + 1; // Smaller particles
+                this.speedX = Math.random() * 0.5 - 0.25; // Slower horizontal drift
+                this.speedY = Math.random() * 0.8 + 0.3; // Slower fall on mobile feel
+                this.opacity = Math.random() * 0.4 + 0.2; // More subtle
             }
 
             update() {
@@ -556,14 +570,15 @@
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`; // Pure white snow
-                ctx.shadowBlur = 10;
-                ctx.shadowColor = "rgba(255, 255, 255, 0.8)";
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = "rgba(255, 255, 255, 0.6)";
                 ctx.fill();
             }
         }
 
         function initParticles() {
+            particles.length = 0; // Clear existing
             for (let i = 0; i < particleCount; i++) {
                 particles.push(new Particle());
             }
