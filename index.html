@@ -5,6 +5,8 @@
     <title>Berg Hub</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="https://files.catbox.moe/r81dz4.png">
+    <!-- Confetti library (tiny, no build needed) -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     <style>
         * {
             box-sizing: border-box;
@@ -167,10 +169,6 @@
         .copy-btn:hover {
             transform: translateY(-4px) scale(1.04);
             box-shadow: 0 12px 40px rgba(255,40,40,0.75);
-        }
-
-        .copy-btn:active {
-            transform: translateY(0) scale(0.98);
         }
 
         .info {
@@ -342,10 +340,6 @@
             box-shadow: 0 12px 35px rgba(255,40,40,0.45);
         }
 
-        .game-card:active {
-            transform: translateY(-2px) scale(0.98);
-        }
-
         .game-card img {
             width: 64px;
             height: 64px;
@@ -415,10 +409,6 @@
             box-shadow: 0 12px 35px rgba(255,40,40,0.75);
         }
 
-        .back-btn:active {
-            transform: translateY(-1px) scale(0.98);
-        }
-
         .feedback-input {
             width: 100%;
             padding: 18px;
@@ -467,10 +457,6 @@
         .submit-btn:hover:not(:disabled) {
             transform: translateY(-4px) scale(1.04);
             box-shadow: 0 12px 40px rgba(255,40,40,0.75);
-        }
-
-        .submit-btn:active {
-            transform: translateY(-1px) scale(0.98);
         }
 
         .submit-btn:disabled {
@@ -539,10 +525,6 @@
 
         .music-toggle:hover {
             transform: translateY(-4px) scale(1.04);
-        }
-
-        .music-toggle:active {
-            transform: translateY(-1px) scale(0.98);
         }
 
         .music-toggle svg {
@@ -757,12 +739,21 @@
         }
         typeTitle();
 
-        // COPY SCRIPT
+        // COPY SCRIPT + CONFETTI
         function copyScript() {
             const scriptContent = document.querySelector(".script-box").innerText;
             navigator.clipboard.writeText(scriptContent);
             const copyTextEl = document.getElementById("copyText");
             copyTextEl.textContent = "Copied!";
+
+            // Trigger confetti
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#ff2a2a', '#ffffff', '#b30000', '#ff6666']
+            });
+
             setTimeout(() => copyTextEl.textContent = "Copy Script", 1500);
         }
 
@@ -793,7 +784,7 @@
             else switchPage("feedbackPage", "mainPage");
         }
 
-        // FEEDBACK
+        // FEEDBACK + CONFETTI ON SUCCESS
         const WEBHOOK_URL = "https://discord.com/api/webhooks/1452857867324620881/oP9x7OtJO2aRjV-_hh2T2grquqiIezidbZPlx1MnXZZG-s-fHP2ocUH4hzXQMQD3OpaV";
         const COOLDOWN_TIME = 60;
         const MIN_CHARS = 10;
@@ -852,6 +843,15 @@
                 if (r.ok) {
                     status.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg><span>Feedback sent! Thank you.</span>';
                     status.className = "status-message status-success";
+
+                    // Trigger confetti on success
+                    confetti({
+                        particleCount: 120,
+                        spread: 80,
+                        origin: { y: 0.6 },
+                        colors: ['#ff2a2a', '#ffffff', '#b30000', '#ff6666']
+                    });
+
                     document.getElementById("feedbackInput").value = "";
                     updateCharCounter();
                     lastSubmitTime = Date.now();
