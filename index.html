@@ -42,18 +42,18 @@
             justify-content: center;
             align-items: center;
             color: white;
-            padding: 20px 16px;
+            padding: 20px;
             overflow-x: hidden;
         }
 
         .container {
             width: 100%;
-            max-width: 520px;
+            max-width: 480px;
             text-align: center;
         }
 
         .logo-title {
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
 
         .title {
@@ -62,6 +62,7 @@
             color: white;
             text-shadow: 0 0 8px rgba(255,0,0,.8), 0 0 25px rgba(255,0,0,.6);
             letter-spacing: -1px;
+            display: inline-block;
             animation: float 3s ease-in-out infinite;
         }
 
@@ -72,22 +73,22 @@
 
         @keyframes slideInDown {
             from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes slideInUp {
             from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes fadeIn {
             from { opacity: 0; }
-            to { opacity: 1; }
+            to   { opacity: 1; }
         }
 
         @keyframes slideUp {
             from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            to   { transform: translateY(0); opacity: 1; }
         }
 
         .page {
@@ -99,6 +100,14 @@
             display: block;
         }
 
+        .page.slide-enter {
+            animation: slideInUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .page.slide-exit {
+            animation: slideInDown 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) reverse;
+        }
+
         .line {
             width: 140px;
             height: 3px;
@@ -106,12 +115,15 @@
             background: linear-gradient(90deg, transparent, #ff0000, transparent);
             box-shadow: 0 0 20px rgba(255,0,0,.8);
             border-radius: 2px;
+            animation: slideInUp 0.8s ease 0.1s both;
         }
 
         .subtitle {
             opacity: .85;
             margin-bottom: 28px;
             font-size: 15px;
+            font-weight: 400;
+            animation: slideInUp 0.8s ease 0.2s both;
         }
 
         .card {
@@ -120,6 +132,7 @@
             padding: 24px;
             box-shadow: inset 0 0 30px rgba(0,0,0,.9), 0 0 25px rgba(255,0,0,.2);
             border: 1px solid rgba(255,0,0,.1);
+            animation: slideUp .8s ease 0.3s both;
             margin-bottom: 24px;
         }
 
@@ -135,6 +148,24 @@
             text-align: left;
             border: 1px solid rgba(255,0,0,.15);
             color: #d4a574;
+        }
+
+        .script-box::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .script-box::-webkit-scrollbar-track {
+            background: transparent;
+            border-radius: 10px;
+        }
+
+        .script-box::-webkit-scrollbar-thumb {
+            background: rgba(255,0,0,.3);
+            border-radius: 10px;
+        }
+
+        .script-box::-webkit-scrollbar-thumb:hover {
+            background: rgba(255,0,0,.5);
         }
 
         .copy-btn {
@@ -160,6 +191,10 @@
             box-shadow: 0 6px 25px rgba(255,0,0,.6);
         }
 
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+
         .info {
             margin-top: 14px;
             font-size: 13px;
@@ -170,7 +205,8 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 12px;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
+            animation: slideInUp 0.8s ease 0.4s both;
         }
 
         .social-link {
@@ -197,34 +233,30 @@
         }
 
         .social-link svg {
-            width: 28px;
-            height: 28px;
+            width: 24px;
+            height: 24px;
         }
 
         .feature-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
-            margin-top: 24px;
+            margin-top: 20px;
+            animation: slideInUp 0.8s ease 0.5s both;
         }
 
         @media (max-width: 480px) {
             .feature-grid {
                 grid-template-columns: 1fr;
             }
-            .title { font-size: 38px; }
-            .social-links { grid-template-columns: repeat(3, 1fr); gap: 10px; }
-            .games-grid { grid-template-columns: 1fr; }
-            .game-card { padding: 20px; }
         }
 
         .feature-box {
-            padding: 16px;
+            padding: 14px;
             background: linear-gradient(180deg, #120000, #080000);
             border-radius: 14px;
             border: 1px solid rgba(255,0,0,.1);
             display: flex;
-            flex-direction: column;
             align-items: center;
             gap: 10px;
             font-size: 13px;
@@ -232,6 +264,7 @@
             color: white;
             transition: all .3s ease;
             cursor: pointer;
+            flex-direction: column;
         }
 
         .feature-box:hover {
@@ -241,29 +274,34 @@
         }
 
         .feature-box svg {
-            width: 28px;
-            height: 28px;
+            width: 22px;
+            height: 22px;
+            flex-shrink: 0;
             stroke: #d4514a;
             fill: none;
             stroke-width: 2;
         }
 
+        .feature-text {
+            text-align: center;
+            flex: 1;
+        }
+
         .feature-title {
             font-weight: 600;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
         .feature-desc {
-            opacity: .7;
+            opacity: .6;
             font-size: 11px;
-            text-align: center;
         }
 
         .games-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 20px;
-            margin-top: 24px;
+            margin-top: 20px;
         }
 
         .game-card {
@@ -274,10 +312,12 @@
             display: flex;
             align-items: center;
             gap: 16px;
+            font-size: 15px;
             text-decoration: none;
             color: white;
             transition: all .3s ease;
             min-height: 100px;
+            animation: staggerIn 0.6s ease both;
         }
 
         .game-card:hover {
@@ -341,6 +381,7 @@
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(255,0,0,.4);
             transition: all .3s ease;
+            animation: slideInDown 0.6s ease;
         }
 
         .back-btn:hover {
@@ -359,6 +400,7 @@
             margin: 20px 0;
             min-height: 160px;
             resize: vertical;
+            animation: slideUp 0.8s ease 0.3s both;
         }
 
         .feedback-input::placeholder {
@@ -370,10 +412,16 @@
             font-size: 12px;
             margin-top: 8px;
             opacity: 0.7;
+            animation: slideInUp 0.8s ease 0.35s both;
         }
 
-        .char-counter.valid { color: #7dff7d; }
-        .char-counter.invalid { color: #ff6b6b; }
+        .char-counter.valid {
+            color: #7dff7d;
+        }
+
+        .char-counter.invalid {
+            color: #ff6b6b;
+        }
 
         .submit-btn {
             width: 100%;
@@ -391,6 +439,7 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
+            animation: slideUp 0.8s ease 0.4s both;
         }
 
         .submit-btn:hover:not(:disabled) {
@@ -398,14 +447,21 @@
             box-shadow: 0 6px 25px rgba(255,0,0,.6);
         }
 
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
         .status-message {
             margin-top: 15px;
             padding: 14px;
             border-radius: 12px;
             font-size: 14px;
+            opacity: 0.9;
             display: flex;
             align-items: center;
             gap: 10px;
+            animation: scaleIn 0.4s ease;
         }
 
         .status-success {
@@ -434,6 +490,7 @@
             flex-direction: column;
             align-items: center;
             gap: 12px;
+            animation: slideInUp 0.8s ease 0.6s both;
         }
 
         .music-toggle {
@@ -456,9 +513,11 @@
         }
 
         .music-toggle svg {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             stroke: #d4514a;
+            fill: none;
+            stroke-width: 2;
         }
 
         #snowCanvas {
@@ -471,12 +530,27 @@
             z-index: -1;
             opacity: 0.7;
         }
+
+        @media (max-width: 480px) {
+            .title {
+                font-size: 38px;
+            }
+            .social-links {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+            .game-card {
+                padding: 20px;
+            }
+        }
     </style>
 </head>
 <body>
     <canvas id="snowCanvas"></canvas>
 
-    <div id="mainPage" class="container page active">
+    <div id="mainPage" class="container page active slide-enter">
         <div class="logo-title">
             <h1 class="title" id="title"></h1>
         </div>
@@ -508,7 +582,7 @@
                 <span>YouTube</span>
             </a>
             <a href="https://scriptblox.com/u/ManFaceScript" target="_blank" class="social-link">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#d4514a" stroke-width="2.5">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#d4514a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M7 8l-4 4 4 4M17 8l4 4-4 4M14 4l-4 16"/>
                 </svg>
                 <span>ScriptBlox</span>
@@ -517,7 +591,7 @@
 
         <div class="feature-grid">
             <div class="feature-box" onclick="showFeedback()">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#d4514a" stroke-width="2">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#d4514a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
                     <path d="M9 9h6"/>
                     <path d="M9 13h6"/>
@@ -527,8 +601,9 @@
                     <div class="feature-desc">Send suggestions</div>
                 </div>
             </div>
+
             <a href="https://junkie-development.de/overview/berghub" target="_blank" class="feature-box">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#d4514a" stroke-width="2">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#d4514a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
                     <path d="M7 11V7a5 5 0 0110 0v4"/>
                 </svg>
@@ -537,8 +612,9 @@
                     <div class="feature-desc">Key System</div>
                 </div>
             </a>
+
             <a href="https://weao.xyz" target="_blank" class="feature-box">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#d4514a" stroke-width="2">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#d4514a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
                     <line x1="12" y1="8" x2="12" y2="16"/>
                     <line x1="8" y1="12" x2="16" y2="12"/>
@@ -548,8 +624,9 @@
                     <div class="feature-desc">Check compatibility</div>
                 </div>
             </a>
+
             <div class="feature-box" onclick="showGames()">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#d4514a" stroke-width="2">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#d4514a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M6 9l6 6 6-6"/>
                     <path d="M12 3v12"/>
                     <circle cx="12" cy="19" r="2"/>
@@ -563,7 +640,7 @@
 
         <div class="footer-info">
             <div class="music-toggle" onclick="toggleMusic()">
-                <svg id="musicIcon" viewBox="0 0 24 24" fill="none" stroke="#d4514a" stroke-width="2">
+                <svg id="musicIcon" viewBox="0 0 24 24" fill="none" stroke-width="2">
                     <path d="M9 18V5l12-2v13M9 18c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 9l12-2"/>
                 </svg>
                 <span id="musicText">Mute Music</span>
@@ -572,7 +649,7 @@
     </div>
 
     <!-- Games Page -->
-    <div id="gamesPage" class="container page" style="display: none;">
+    <div id="gamesPage" class="container page">
         <button class="back-btn" onclick="showMain()">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M19 12H5M12 19l-7-7 7-7"/>
@@ -586,14 +663,14 @@
         <p class="subtitle">List of games currently supported by Berg Hub</p>
         <div class="games-grid">
             <a href="https://www.roblox.com/games/18856160616" target="_blank" class="game-card">
-                <img src="https://tr.rbxcdn.com/180DAY-3c292ac444be6b9a2f1af797629a869c/768/432/Image/Webp/noFilter" alt="Undead Defense">
+                <img src="https://tr.rbxcdn.com/180DAY-3c292ac444be6b9a2f1af797629a869c/768/432/Image/Webp/noFilter" alt="Undead Defense" loading="lazy">
                 <div class="game-text">
                     <div class="game-title">Undead Defense</div>
                 </div>
                 <span class="game-status status-working">Working</span>
             </a>
             <a href="https://www.roblox.com/games/12177325772" target="_blank" class="game-card">
-                <img src="https://tr.rbxcdn.com/180DAY-ee680be33935a96f86396dbfcd3bcfc8/768/432/Image/Webp/noFilter" alt="FIFA Super Soccer!">
+                <img src="https://tr.rbxcdn.com/180DAY-ee680be33935a96f86396dbfcd3bcfc8/768/432/Image/Webp/noFilter" alt="FIFA Super Soccer!" loading="lazy">
                 <div class="game-text">
                     <div class="game-title">FIFA Super Soccer!</div>
                 </div>
@@ -603,7 +680,7 @@
     </div>
 
     <!-- Feedback Page -->
-    <div id="feedbackPage" class="container page" style="display: none;">
+    <div id="feedbackPage" class="container page">
         <button class="back-btn" onclick="showMain()">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M19 12H5M12 19l-7-7 7-7"/>
@@ -625,7 +702,7 @@
                 </svg>
                 <span>Submit Feedback</span>
             </button>
-            <div id="statusMessage" class="status-message"></div>
+            <div id="statusMessage"></div>
             <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,0,0,0.1);">
                 <p style="font-size: 13px; opacity: 0.7; line-height: 1.5;">
                     Your feedback helps us improve Berg Hub. We read every submission and use your input to make the experience better for everyone.
@@ -636,6 +713,7 @@
 
     <audio id="bgMusic" loop>
         <source src="https://files.catbox.moe/cjqi6m.mp3" type="audio/mpeg">
+        Your browser does not support audio.
     </audio>
 
     <script>
@@ -643,6 +721,7 @@
         const titleText = "Berg Hub";
         let i = 0;
         const title = document.getElementById("title");
+
         function typeTitle() {
             if (i < titleText.length) {
                 title.textContent += titleText.charAt(i);
@@ -664,22 +743,22 @@
         // === PAGE SWITCHING ===
         function switchPage(fromId, toId) {
             const from = document.getElementById(fromId);
-            const to = document.getElementById(toId);
+            const to   = document.getElementById(toId);
+
             from.classList.remove("active");
             from.classList.add("slide-exit");
+
             setTimeout(() => {
                 from.classList.remove("slide-exit");
                 to.classList.add("active", "slide-enter");
             }, 400);
         }
 
-        function showGames() { switchPage("mainPage", "gamesPage"); }
-        function showFeedback() {
-            switchPage("mainPage", "feedbackPage");
-            document.getElementById("feedbackInput").value = '';
-            document.getElementById("statusMessage").textContent = '';
-            updateCharCounter();
-        }
+        function showGames()    { switchPage("mainPage", "gamesPage"); }
+        function showFeedback() { switchPage("mainPage", "feedbackPage"); 
+                                  document.getElementById("feedbackInput").value = '';
+                                  document.getElementById("statusMessage").textContent = '';
+                                  updateCharCounter(); }
         function showMain() {
             const current = document.querySelector(".page.active");
             if (current.id === "gamesPage") switchPage("gamesPage", "mainPage");
@@ -691,6 +770,7 @@
         const COOLDOWN_TIME = 60;
         const MIN_CHARS = 10;
         const MAX_CHARS = 1000;
+
         let lastSubmitTime = 0;
         let cooldownTimer = null;
 
@@ -699,6 +779,7 @@
             const counter = document.getElementById("charCounter");
             const count = input.value.length;
             const valid = count >= MIN_CHARS;
+
             counter.textContent = `${count} / ${MAX_CHARS} characters`;
             counter.classList.remove("valid", "invalid");
             if (count === 0) counter.classList.add("invalid");
@@ -710,6 +791,7 @@
             const btn = document.getElementById("submitBtn");
             const now = Date.now();
             const timeLeft = COOLDOWN_TIME - Math.floor((now - lastSubmitTime) / 1000);
+
             if (timeLeft > 0) {
                 btn.disabled = true;
                 btn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Wait ${timeLeft}s</span>`;
@@ -723,13 +805,16 @@
         function submitFeedback() {
             const input = document.getElementById("feedbackInput").value.trim();
             const status = document.getElementById("statusMessage");
+
             if (input.length < MIN_CHARS) {
                 status.textContent = `Feedback must be at least ${MIN_CHARS} characters.`;
                 status.className = "status-message status-error";
                 return;
             }
+
             status.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg><span>Sending...</span>';
             status.className = "status-message status-sending";
+
             fetch(WEBHOOK_URL, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -754,10 +839,11 @@
             });
         }
 
-        // === SNOW EFFECT (SLOWER) ===
+        // === SNOW EFFECT ===
         const canvas = document.getElementById('snowCanvas');
         const ctx = canvas.getContext('2d');
         let particleCount = window.innerWidth <= 768 ? 40 : 100;
+
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
@@ -775,8 +861,8 @@
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
                 this.size = Math.random() * 3 + 1;
-                this.speedX = Math.random() * 0.3 - 0.15; // slower horizontal
-                this.speedY = Math.random() * 0.4 + 0.1; // much slower vertical
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.8 + 0.3;
                 this.opacity = Math.random() * 0.4 + 0.2;
             }
             update() {
