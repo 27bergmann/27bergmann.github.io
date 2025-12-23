@@ -97,6 +97,24 @@
             border: 1px solid rgba(255,0,0,.15);
             color: #d4a574;
         }
+        .script-box::-webkit-scrollbar {
+            height: 8px;
+        }
+        .script-box::-webkit-scrollbar-track {
+            background: transparent;
+            border-radius: 10px;
+        }
+        .script-box::-webkit-scrollbar-thumb {
+            background: rgba(255,0,0,.3);
+            border-radius: 10px;
+        }
+        .script-box::-webkit-scrollbar-thumb:hover {
+            background: rgba(255,0,0,.5);
+        }
+        .script-box {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255,0,0,.3) transparent;
+        }
         .copy-btn {
             width: 100%;
             padding: 14px;
@@ -187,20 +205,10 @@
             border-color: rgba(255,0,0,.3);
             transform: translateY(-2px);
         }
-        .feature-box svg, .feature-box img {
+        .feature-box svg {
             width: 20px;
             height: 20px;
             flex-shrink: 0;
-            border-radius: 4px;
-            object-fit: cover;
-        }
-        .feature-box.secure svg {
-            stroke: #7dff7d;
-            fill: none;
-        }
-        .feature-box.opensource svg {
-            stroke: #d4514a;
-            fill: none;
         }
         .feature-text {
             text-align: left;
@@ -213,6 +221,53 @@
         .feature-desc {
             opacity: .6;
             font-size: 11px;
+        }
+
+        /* Feedback Page Styles (matching Supported Games colors) */
+        .feedback-info {
+            margin: 20px 0;
+            opacity: 0.85;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+        .feedback-input {
+            width: 100%;
+            padding: 16px;
+            background: #0a0000;
+            border: 1px solid rgba(255,0,0,.15);
+            border-radius: 14px;
+            color: white;
+            font-size: 14px;
+            margin: 20px 0;
+            min-height: 120px;
+            resize: vertical;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #ff0000, #b30000);
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(255,0,0,.4);
+            transition: all .3s ease;
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(255,0,0,.6);
+        }
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .status-message {
+            margin-top: 15px;
+            font-size: 14px;
+            opacity: 0.9;
         }
 
         .games-grid {
@@ -441,7 +496,7 @@
                 </svg>
                 <div class="feature-text">
                     <div class="feature-title">Supported Executor</div>
-                    <div class="feature-desc">Check if your Executor is supported</div>
+                    <div class="feature-desc">Check compatibility</div>
                 </div>
             </a>
             <div class="feature-box opensource" onclick="showGames()">
@@ -473,11 +528,13 @@
             </svg>
             Back to Hub
         </button>
+
         <div class="logo-title">
             <h1 class="title">Supported Games</h1>
         </div>
         <div class="line"></div>
         <p class="subtitle">List of games currently supported by Berg Hub</p>
+
         <div class="games-grid">
             <a href="https://www.roblox.com/games/18856160616" target="_blank" class="game-card">
                 <img src="https://tr.rbxcdn.com/180DAY-3c292ac444be6b9a2f1af797629a869c/768/432/Image/Webp/noFilter" alt="Undead Defense Icon" loading="lazy">
@@ -486,6 +543,7 @@
                 </div>
                 <span class="game-status status-working">Working</span>
             </a>
+
             <a href="https://www.roblox.com/games/12177325772" target="_blank" class="game-card">
                 <img src="https://tr.rbxcdn.com/180DAY-ee680be33935a96f86396dbfcd3bcfc8/768/432/Image/Webp/noFilter" alt="FIFA Super Soccer! Icon" loading="lazy">
                 <div class="game-text">
@@ -524,10 +582,160 @@
     </audio>
 
     <script>
-        // Your existing scripts (typewriter, copy, snow, music, etc.) remain unchanged
-        // ... (copy from your previous working version)
+        // Typewriter effect
+        const titleText = "Berg Hub";
+        let i = 0;
+        const title = document.getElementById("title");
+        function typeTitle() {
+            if (i < titleText.length) {
+                title.textContent += titleText.charAt(i);
+                i++;
+                setTimeout(typeTitle, 120);
+            }
+        }
+        typeTitle();
 
-        // Add this new script for feedback page
+        // Copy function
+        function copyScript() {
+            const scriptContent = document.querySelector(".script-box").innerText;
+            navigator.clipboard.writeText(scriptContent);
+            const copyTextEl = document.getElementById("copyText");
+            copyTextEl.textContent = "Copied!";
+            setTimeout(() => {
+                copyTextEl.textContent = "Copy Script";
+            }, 1500);
+        }
+
+        // Page switching
+        function showGames() {
+            document.getElementById("mainPage").classList.remove("active");
+            document.getElementById("gamesPage").classList.add("active");
+        }
+
+        function showFeedback() {
+            document.getElementById("mainPage").classList.remove("active");
+            document.getElementById("feedbackPage").classList.add("active");
+            document.getElementById("feedbackInput").value = '';
+            document.getElementById("statusMessage").textContent = '';
+            updateSubmitButton();
+        }
+
+        function showMain() {
+            document.getElementById("gamesPage").classList.remove("active");
+            document.getElementById("feedbackPage").classList.remove("active");
+            document.getElementById("mainPage").classList.add("active");
+        }
+
+        // Snow Particle Effect - Mobile optimized
+        const canvas = document.getElementById('snowCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let particleCount = 100;
+        if (window.innerWidth <= 768) {
+            particleCount = 40;
+        }
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            if (window.innerWidth <= 768) {
+                particleCount = 40;
+            } else {
+                particleCount = 100;
+            }
+            initParticles();
+        });
+
+        const particles = [];
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.8 + 0.3;
+                this.opacity = Math.random() * 0.4 + 0.2;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.y > canvas.height) {
+                    this.y = -10;
+                    this.x = Math.random() * canvas.width;
+                }
+                if (this.x > canvas.width || this.x < 0) {
+                    this.speedX *= -1;
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = "rgba(255, 255, 255, 0.6)";
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles.length = 0;
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        initParticles();
+        animate();
+
+        // Background Music
+        const music = document.getElementById('bgMusic');
+        const musicIcon = document.getElementById('musicIcon');
+        const musicText = document.getElementById('musicText');
+        let isPlaying = false;
+
+        document.body.addEventListener('click', startMusic, { once: true });
+        document.body.addEventListener('touchstart', startMusic, { once: true });
+
+        function startMusic() {
+            music.play().catch(e => console.log("Auto-play prevented:", e));
+            isPlaying = true;
+            musicText.textContent = 'Mute Music';
+            musicIcon.innerHTML = '<path d="M9 18V5l12-2v13M9 18c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 9l12-2"/>';
+        }
+
+        function toggleMusic() {
+            if (isPlaying) {
+                music.pause();
+                isPlaying = false;
+                musicText.textContent = 'Play Music';
+                musicIcon.innerHTML = '<path d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>';
+            } else {
+                music.play();
+                isPlaying = true;
+                musicText.textContent = 'Mute Music';
+                musicIcon.innerHTML = '<path d="M9 18V5l12-2v13M9 18c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 9l12-2"/>';
+            }
+        }
+
+        musicText.textContent = 'Mute Music';
+
+        // Feedback submission with 60-second cooldown
         const webhookURL = "https://discord.com/api/webhooks/1452857867324620881/oP9x7OtJO2aRjV-_hh2T2grquqiIezidbZPlx1MnXZZG-s-fHP2ocUH4hzXQMQD3OpaV";
         const submitBtn = document.getElementById("submitBtn");
         const statusMessage = document.getElementById("statusMessage");
@@ -554,7 +762,7 @@
             }
 
             const payload = {
-                content: "**New Feedback from Berg Hub**\n\n" + input
+                content: "**New Feedback from Berg Hub website**\n\n" + input
             };
 
             fetch(webhookURL, {
@@ -564,19 +772,19 @@
             })
             .then(response => {
                 if (response.ok) {
-                    statusMessage.textContent = "Feedback sent! Thank you!";
+                    statusMessage.textContent = "Feedback sent successfully! Thank you ❤️";
                     statusMessage.style.color = "#7dff7d";
                     document.getElementById("feedbackInput").value = "";
                     lastSubmitTime = Date.now();
                     updateSubmitButton();
                     setInterval(updateSubmitButton, 1000);
                 } else {
-                    statusMessage.textContent = "Error sending feedback";
+                    statusMessage.textContent = "Error sending feedback. Try again later.";
                     statusMessage.style.color = "#ff6666";
                 }
             })
             .catch(() => {
-                statusMessage.textContent = "Error sending feedback";
+                statusMessage.textContent = "Error sending feedback. Try again later.";
                 statusMessage.style.color = "#ff6666";
             });
         }
