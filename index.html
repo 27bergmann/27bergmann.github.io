@@ -351,6 +351,36 @@
             z-index: -1;
             opacity: 0.7;
         }
+
+        /* Visitor Counter & Music Toggle */
+        .footer-info {
+            margin-top: 30px;
+            font-size: 13px;
+            opacity: 0.7;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+        .music-toggle {
+            padding: 10px 16px;
+            background: linear-gradient(180deg, #120000, #080000);
+            border-radius: 12px;
+            cursor: pointer;
+            border: 1px solid rgba(255,0,0,.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all .3s ease;
+        }
+        .music-toggle:hover {
+            background: #1a0000;
+            border-color: rgba(255,0,0,.4);
+        }
+        .music-toggle svg {
+            width: 18px;
+            height: 18px;
+        }
     </style>
 </head>
 <body>
@@ -444,6 +474,17 @@
                 </div>
             </div>
         </div>
+
+        <!-- Visitor Counter & Music Toggle -->
+        <div class="footer-info">
+            <div>Visitors: <span id="visitorCount">Loading...</span></div>
+            <div class="music-toggle" onclick="toggleMusic()">
+                <svg id="musicIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>
+                </svg>
+                <span id="musicText">Play Music</span>
+            </div>
+        </div>
     </div>
 
     <!-- Supported Games Page -->
@@ -479,6 +520,12 @@
             </a>
         </div>
     </div>
+
+    <!-- Background Music -->
+    <audio id="bgMusic" loop>
+        <source src="https://files.catbox.moe/0r7q0v.mp3" type="audio/mpeg">
+        Your browser does not support audio.
+    </audio>
 
     <script>
         // Typewriter effect
@@ -519,11 +566,9 @@
         const canvas = document.getElementById('snowCanvas');
         const ctx = canvas.getContext('2d');
 
-        let particleCount = 100; // Default for desktop
-
-        // Reduce particles and speed on mobile
+        let particleCount = 100;
         if (window.innerWidth <= 768) {
-            particleCount = 40; // Fewer particles on mobile
+            particleCount = 40;
         }
 
         canvas.width = window.innerWidth;
@@ -532,14 +577,12 @@
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-
-            // Re-adjust particle count on resize
             if (window.innerWidth <= 768) {
                 particleCount = 40;
             } else {
                 particleCount = 100;
             }
-            initParticles(); // Re-init with new count
+            initParticles();
         });
 
         const particles = [];
@@ -548,10 +591,10 @@
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 3 + 1; // Smaller particles
-                this.speedX = Math.random() * 0.5 - 0.25; // Slower horizontal drift
-                this.speedY = Math.random() * 0.8 + 0.3; // Slower fall on mobile feel
-                this.opacity = Math.random() * 0.4 + 0.2; // More subtle
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.8 + 0.3;
+                this.opacity = Math.random() * 0.4 + 0.2;
             }
 
             update() {
@@ -578,7 +621,7 @@
         }
 
         function initParticles() {
-            particles.length = 0; // Clear existing
+            particles.length = 0;
             for (let i = 0; i < particleCount; i++) {
                 particles.push(new Particle());
             }
@@ -595,6 +638,43 @@
 
         initParticles();
         animate();
+
+        // Visitor Counter (using CountAPI - free & simple)
+        fetch('https://api.countapi.xyz/hit/berghub-visitors/visit')
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('visitorCount').textContent = data.value.toLocaleString();
+            })
+            .catch(() => {
+                document.getElementById('visitorCount').textContent = 'N/A';
+            });
+
+        // Background Music Toggle
+        const music = document.getElementById('bgMusic');
+        const musicIcon = document.getElementById('musicIcon');
+        const musicText = document.getElementById('musicText');
+        let isPlaying = false;
+
+        function toggleMusic() {
+            if (isPlaying) {
+                music.pause();
+                isPlaying = false;
+                musicText.textContent = 'Play Music';
+                musicIcon.innerHTML = '<path d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>';
+            } else {
+                music.play();
+                isPlaying = true;
+                musicText.textContent = 'Pause Music';
+                musicIcon.innerHTML = '<path d="M9 18V5l12-2v13M9 18c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 9l12-2"/>';
+            }
+        }
+
+        // Auto-play music on first user interaction (to bypass browser restrictions)
+        document.body.addEventListener('click', () => {
+            if (!isPlaying) {
+                music.play().catch(() => {});
+            }
+        }, { once: true });
     </script>
 </body>
 </html>
