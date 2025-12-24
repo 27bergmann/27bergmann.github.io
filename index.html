@@ -236,6 +236,25 @@
             margin-top: 36px;
         }
 
+        @media (max-width: 520px) {
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            .feature-icon {
+                width: 40px;
+                height: 40px;
+            }
+            .feature-box {
+                padding: 22px 20px;
+            }
+            .feature-title {
+                font-size: 16px;
+            }
+            .feature-desc {
+                font-size: 13px;
+            }
+        }
+
         .feature-box {
             padding: 18px 16px;
             background: linear-gradient(145deg, #120000, #080000);
@@ -573,9 +592,6 @@
             .social-links { grid-template-columns: repeat(3, 1fr); }
             .games-grid { grid-template-columns: 1fr; }
             .game-card { padding: 20px; }
-            .feature-icon { width: 36px; height: 36px; }
-            .feature-title { font-size: 16px; }
-            .feature-desc { font-size: 13px; }
         }
     </style>
 </head>
@@ -637,11 +653,8 @@
 
             <a href="https://junkie-development.de/overview/berghub" target="_blank" class="feature-box">
                 <svg class="feature-icon" viewBox="0 0 24 24">
-                    <path d="M14 2v5a2 2 0 0 0 2 2h5"/>
-                    <path d="M7 2h7l6 6v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/>
-                    <circle cx="12" cy="13" r="3"/>
-                    <path d="M12 10v1"/>
-                    <path d="M12 16v1"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 15a3 3 0 100-6 3 3 0 000 6z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
                 </svg>
                 <div class="feature-text">
                     <div class="feature-title">Berg Hub</div>
@@ -651,10 +664,10 @@
 
             <a href="https://weao.xyz" target="_blank" class="feature-box">
                 <svg class="feature-icon" viewBox="0 0 24 24">
-                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                    <rect x="7" y="7" width="4" height="4"/>
-                    <rect x="13" y="7" width="4" height="4"/>
-                    <rect x="7" y="13" width="10" height="4"/>
+                    <rect x="3" y="4" width="18" height="16" rx="2" ry="2"/>
+                    <circle cx="8" cy="9" r="1.5"/>
+                    <circle cx="12" cy="9" r="1.5"/>
+                    <circle cx="16" cy="9" r="1.5"/>
                 </svg>
                 <div class="feature-text">
                     <div class="feature-title">Supported Executor</div>
@@ -664,12 +677,7 @@
 
             <div class="feature-box" onclick="showGames()">
                 <svg class="feature-icon" viewBox="0 0 24 24">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <path d="M9 22V12h6v10"/>
-                    <circle cx="8" cy="15" r="1"/>
-                    <circle cx="16" cy="15" r="1"/>
-                    <path d="M12 12v3"/>
-                    <path d="M9 15h6"/>
+                    <path d="M21 16.5c0 2.5-3.5 4.5-8 4.5s-8-2-8-4.5"/><path d="M21 9.5V16.5"/><path d="M3 9.5V16.5"/><path d="M17 5.5l-4 4-4-4"/><path d="M13 5.5v8"/><circle cx="8" cy="13" r="1"/><circle cx="16" cy="13" r="1"/>
                 </svg>
                 <div class="feature-text">
                     <div class="feature-title">Supported Games</div>
@@ -778,7 +786,6 @@
             const copyTextEl = document.getElementById("copyText");
             copyTextEl.textContent = "Copied!";
 
-            // Trigger confetti
             confetti({
                 particleCount: 100,
                 spread: 70,
@@ -795,10 +802,8 @@
             const to   = document.getElementById(toId);
 
             from.classList.remove("active");
-            from.classList.add("slide-exit");
 
             setTimeout(() => {
-                from.classList.remove("slide-exit");
                 to.classList.add("active");
             }, 500);
         }
@@ -807,7 +812,7 @@
         function showFeedback() { 
             switchPage("mainPage", "feedbackPage"); 
             document.getElementById("feedbackInput").value = '';
-            document.getElementById("statusMessage").textContent = '';
+            document.getElementById("statusMessage").innerHTML = '';
             updateCharCounter(); 
         }
         function showMain() {
@@ -832,10 +837,8 @@
             const valid = count >= MIN_CHARS;
 
             counter.textContent = `${count} / ${MAX_CHARS} characters`;
-            counter.classList.remove("valid", "invalid");
-            if (count === 0) counter.classList.add("invalid");
-            else if (valid) counter.classList.add("valid");
-            else counter.classList.add("invalid");
+            counter.classList.toggle("valid", valid && count > 0);
+            counter.classList.toggle("invalid", count < MIN_CHARS && count > 0);
         }
 
         function updateSubmitButton() {
@@ -858,7 +861,7 @@
             const status = document.getElementById("statusMessage");
 
             if (input.length < MIN_CHARS) {
-                status.textContent = `Feedback must be at least ${MIN_CHARS} characters.`;
+                status.innerHTML = `Feedback must be at least ${MIN_CHARS} characters.`;
                 status.className = "status-message status-error";
                 return;
             }
@@ -876,7 +879,6 @@
                     status.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg><span>Feedback sent! Thank you.</span>';
                     status.className = "status-message status-success";
 
-                    // Trigger confetti on success
                     confetti({
                         particleCount: 120,
                         spread: 80,
