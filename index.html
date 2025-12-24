@@ -5,7 +5,7 @@
     <title>Berg Hub</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="https://files.catbox.moe/r81dz4.png">
-    <!-- Confetti library -->
+    <!-- Confetti library (tiny, no build needed) -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
@@ -192,6 +192,10 @@
             box-shadow: 0 12px 35px rgba(255,40,40,0.6);
             border-color: rgba(255,40,40,0.55);
         }
+        .social-link:active {
+            transform: translateY(-2px) scale(0.97);
+            box-shadow: 0 4px 20px rgba(255,40,40,0.8);
+        }
         .social-icon {
             width: 36px;
             height: 36px;
@@ -204,11 +208,22 @@
             margin-top: 36px;
         }
         @media (max-width: 520px) {
-            .feature-grid { grid-template-columns: 1fr; }
-            .feature-icon { width: 40px; height: 40px; }
-            .feature-box { padding: 22px 20px; }
-            .feature-title { font-size: 16px; }
-            .feature-desc { font-size: 13px; }
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            .feature-icon {
+                width: 40px;
+                height: 40px;
+            }
+            .feature-box {
+                padding: 22px 20px;
+            }
+            .feature-title {
+                font-size: 16px;
+            }
+            .feature-desc {
+                font-size: 13px;
+            }
         }
         .feature-box {
             padding: 18px 16px;
@@ -239,7 +254,9 @@
             background: linear-gradient(90deg, transparent, rgba(255,50,50,0.15), transparent);
             transition: left 0.6s ease;
         }
-        .feature-box:hover::before { left: 100%; }
+        .feature-box:hover::before {
+            left: 100%;
+        }
         .feature-box:nth-child(1) { animation-delay: 1.7s; }
         .feature-box:nth-child(2) { animation-delay: 1.8s; }
         .feature-box:nth-child(3) { animation-delay: 1.9s; }
@@ -251,6 +268,10 @@
             transform: translateY(-5px) scale(1.04);
             box-shadow: 0 12px 35px rgba(255,40,40,0.45);
             border-color: rgba(255,40,40,0.55);
+        }
+        .feature-box:active {
+            transform: translateY(-2px) scale(0.97);
+            box-shadow: 0 4px 20px rgba(255,40,40,0.8);
         }
         .feature-box:hover .feature-icon {
             animation: crooked 0.5s ease-in-out;
@@ -279,32 +300,6 @@
             opacity: 0.65;
             font-size: 12px;
         }
-        /* Search bar on games page */
-        .search-container {
-            margin: 20px 0;
-            position: relative;
-        }
-        .search-input {
-            width: 100%;
-            padding: 14px 20px 14px 45px;
-            background: #0a0000;
-            border: 1px solid rgba(255,40,40,0.3);
-            border-radius: 16px;
-            color: white;
-            font-size: 15px;
-        }
-        .search-input::placeholder {
-            color: rgba(255,255,255,0.4);
-        }
-        .search-icon {
-            position: absolute;
-            left: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 20px;
-            height: 20px;
-            stroke: #ff6666;
-        }
         .games-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -319,26 +314,17 @@
             display: flex;
             align-items: center;
             gap: 18px;
+            font-size: 15px;
             text-decoration: none;
             color: white;
             transition: all .4s ease;
             min-height: 100px;
             opacity: 0;
             transform: translateY(40px);
-            position: relative;
-            overflow: hidden;
+            animation: cardRise 1s ease forwards;
         }
-        .game-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,50,50,0.15), transparent);
-            transition: left 0.6s ease;
-        }
-        .game-card:hover::before { left: 100%; }
+        .game-card:nth-child(1) { animation-delay: 1.2s; }
+        .game-card:nth-child(2) { animation-delay: 1.3s; }
         .game-card:hover {
             background: linear-gradient(145deg, #1a0000, #0f0000);
             border-color: rgba(255,40,40,0.55);
@@ -399,6 +385,7 @@
             cursor: pointer;
             box-shadow: 0 6px 20px rgba(255,40,40,0.55);
             transition: all .4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            animation: slideInDown 0.8s ease;
         }
         .back-btn:hover {
             transform: translateY(-4px) scale(1.04);
@@ -416,8 +403,15 @@
             min-height: 160px;
             resize: vertical;
         }
-        .feedback-input::placeholder { color: rgba(255,255,255,0.4); }
-        .char-counter { text-align: right; font-size: 13px; margin-top: 8px; opacity: 0.75; }
+        .feedback-input::placeholder {
+            color: rgba(255,255,255,0.4);
+        }
+        .char-counter {
+            text-align: right;
+            font-size: 13px;
+            margin-top: 8px;
+            opacity: 0.75;
+        }
         .char-counter.valid { color: #7fff7f; }
         .char-counter.invalid { color: #ff6b6b; }
         .submit-btn {
@@ -441,7 +435,10 @@
             transform: translateY(-4px) scale(1.04);
             box-shadow: 0 12px 40px rgba(255,40,40,0.75);
         }
-        .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
         .status-message {
             margin-top: 18px;
             padding: 16px;
@@ -453,9 +450,21 @@
             gap: 12px;
             animation: scaleIn 0.5s ease;
         }
-        .status-success { background: rgba(0,255,100,.2); border: 1px solid rgba(0,255,100,.45); color: #7fff7f; }
-        .status-error { background: rgba(255,40,40,.2); border: 1px solid rgba(255,40,40,.45); color: #ff6b6b; }
-        .status-sending { background: rgba(255,200,0,.2); border: 1px solid rgba(255,200,0,.45); color: #ffcc00; }
+        .status-success {
+            background: rgba(0,255,100,.2);
+            border: 1px solid rgba(0,255,100,.45);
+            color: #7fff7f;
+        }
+        .status-error {
+            background: rgba(255,40,40,.2);
+            border: 1px solid rgba(255,40,40,.45);
+            color: #ff6b6b;
+        }
+        .status-sending {
+            background: rgba(255,200,0,.2);
+            border: 1px solid rgba(255,200,0,.45);
+            color: #ffcc00;
+        }
         @keyframes scaleIn {
             from { transform: scale(0.9); opacity: 0; }
             to { transform: scale(1); opacity: 0.95; }
@@ -482,7 +491,9 @@
             color: white;
             font-size: 14px;
         }
-        .music-toggle:hover { transform: translateY(-4px) scale(1.04); }
+        .music-toggle:hover {
+            transform: translateY(-4px) scale(1.04);
+        }
         .music-toggle svg {
             width: 20px;
             height: 20px;
@@ -510,8 +521,6 @@
 </head>
 <body>
     <canvas id="snowCanvas"></canvas>
-
-    <!-- Main Page -->
     <div id="mainPage" class="container page active">
         <div class="logo-title">
             <h1 class="title" id="title"></h1>
@@ -529,7 +538,6 @@
             </button>
             <p class="info">Paste this script into your executor.</p>
         </div>
-
         <div class="social-links">
             <a href="https://discord.gg/ZRuJcQmaUJ" target="_blank" class="social-link">
                 <svg class="social-icon" viewBox="0 0 24 24" fill="#d4514a">
@@ -550,8 +558,8 @@
                 <span>ScriptBlox</span>
             </a>
         </div>
-
         <div class="feature-grid">
+            <!-- Updated Feedback icon with 3 lines inside -->
             <div class="feature-box" onclick="showFeedback()">
                 <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="#ff6666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
@@ -586,7 +594,6 @@
                 </div>
             </div>
         </div>
-
         <div class="footer-info">
             <div class="music-toggle" onclick="toggleMusic()">
                 <svg id="musicIcon" viewBox="0 0 24 24" fill="none" stroke-width="2">
@@ -596,8 +603,7 @@
             </div>
         </div>
     </div>
-
-    <!-- Games Page (Dynamic) -->
+    <!-- Games Page -->
     <div id="gamesPage" class="container page">
         <button class="back-btn" onclick="showMain()">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -610,20 +616,23 @@
         </div>
         <div class="line"></div>
         <p class="subtitle">List of games currently supported by Berg Hub</p>
-
-        <div class="search-container">
-            <input type="text" id="searchInput" class="search-input" placeholder="Search games..." onkeyup="filterGames()">
-            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-        </div>
-
-        <div id="gamesGrid" class="games-grid">
-            <!-- Filled dynamically by JS -->
+        <div class="games-grid">
+            <a href="https://www.roblox.com/games/18856160616" target="_blank" class="game-card">
+                <img src="https://tr.rbxcdn.com/180DAY-3c292ac444be6b9a2f1af797629a869c/768/432/Image/Webp/noFilter" alt="Undead Defense" loading="lazy">
+                <div class="game-text">
+                    <div class="game-title">Undead Defense</div>
+                </div>
+                <span class="game-status status-working">Working</span>
+            </a>
+            <a href="https://www.roblox.com/games/12177325772" target="_blank" class="game-card">
+                <img src="https://tr.rbxcdn.com/180DAY-ee680be33935a96f86396dbfcd3bcfc8/768/432/Image/Webp/noFilter" alt="FIFA Super Soccer!" loading="lazy">
+                <div class="game-text">
+                    <div class="game-title">FIFA Super Soccer!</div>
+                </div>
+                <span class="game-status status-development">In-Development</span>
+            </a>
         </div>
     </div>
-
     <!-- Feedback Page -->
     <div id="feedbackPage" class="container page">
         <button class="back-btn" onclick="showMain()">
@@ -655,16 +664,14 @@
             </div>
         </div>
     </div>
-
     <audio id="bgMusic" loop>
         <source src="https://files.catbox.moe/cjqi6m.mp3" type="audio/mpeg">
         Your browser does not support audio.
     </audio>
-
     <script>
+        // Initialize Lucide icons
         lucide.createIcons();
-
-        // Typewriter Title
+        // TITLE TYPEWRITER
         const titleText = "Berg Hub";
         let i = 0;
         const title = document.getElementById("title");
@@ -676,8 +683,7 @@
             }
         }
         typeTitle();
-
-        // Copy Script + Confetti
+        // COPY SCRIPT + CONFETTI
         function copyScript() {
             const scriptContent = document.querySelector(".script-box").innerText;
             navigator.clipboard.writeText(scriptContent);
@@ -691,13 +697,16 @@
             });
             setTimeout(() => copyTextEl.textContent = "Copy Script", 1500);
         }
-
-        // Page Switching
+        // PAGE SWITCHING
         function switchPage(fromId, toId) {
-            document.getElementById(fromId).classList.remove("active");
-            setTimeout(() => document.getElementById(toId).classList.add("active"), 500);
+            const from = document.getElementById(fromId);
+            const to = document.getElementById(toId);
+            from.classList.remove("active");
+            setTimeout(() => {
+                to.classList.add("active");
+            }, 500);
         }
-        function showGames() { switchPage("mainPage", "gamesPage"); loadGames(); }
+        function showGames() { switchPage("mainPage", "gamesPage"); }
         function showFeedback() {
             switchPage("mainPage", "feedbackPage");
             document.getElementById("feedbackInput").value = '';
@@ -706,71 +715,25 @@
         }
         function showMain() {
             const current = document.querySelector(".page.active");
-            switchPage(current.id, "mainPage");
+            if (current.id === "gamesPage") switchPage("gamesPage", "mainPage");
+            else switchPage("feedbackPage", "mainPage");
         }
-
-        // Dynamic Games List
-        async function loadGames() {
-            const grid = document.getElementById("gamesGrid");
-            grid.innerHTML = '<p style="grid-column: 1 / -1; opacity: 0.7;">Loading games...</p>';
-
-            try {
-                const response = await fetch("games.json?t=" + Date.now()); // cache buster
-                const games = await response.json();
-
-                grid.innerHTML = '';
-                games.forEach((game, index) => {
-                    const card = document.createElement('a');
-                    card.href = game.url;
-                    card.target = "_blank";
-                    card.className = "game-card";
-                    card.style.animationDelay = `${index * 0.15}s`;
-                    card.innerHTML = `
-                        <img src="${game.thumbnail}" alt="${game.title}" loading="lazy">
-                        <div class="game-text">
-                            <div class="game-title">${game.title}</div>
-                        </div>
-                        <span class="game-status status-${game.status}">${game.status === "working" ? "Working" : "In-Development"}</span>
-                    `;
-                    card.onclick = (e) => {
-                        e.preventDefault();
-                        confetti({ particleCount: 80, spread: 70, origin: { y: 0.7 } });
-                        setTimeout(() => window.open(game.url, "_blank"), 300);
-                    };
-                    grid.appendChild(card);
-                });
-            } catch (err) {
-                grid.innerHTML = '<p style="grid-column: 1 / -1; color: #ff6b6b;">Failed to load games.json. Check console.</p>';
-                console.error("Games load error:", err);
-            }
-        }
-
-        function filterGames() {
-            const query = document.getElementById("searchInput").value.toLowerCase();
-            const cards = document.querySelectorAll(".game-card");
-            cards.forEach(card => {
-                const title = card.querySelector(".game-title").textContent.toLowerCase();
-                card.style.display = title.includes(query) ? "flex" : "none";
-            });
-        }
-
-        // Feedback System
+        // FEEDBACK + CONFETTI ON SUCCESS
         const WEBHOOK_URL = "https://discord.com/api/webhooks/1452857867324620881/oP9x7OtJO2aRjV-_hh2T2grquqiIezidbZPlx1MnXZZG-s-fHP2ocUH4hzXQMQD3OpaV";
         const COOLDOWN_TIME = 60;
         const MIN_CHARS = 10;
         const MAX_CHARS = 1000;
         let lastSubmitTime = 0;
         let cooldownTimer = null;
-
         function updateCharCounter() {
             const input = document.getElementById("feedbackInput");
             const counter = document.getElementById("charCounter");
             const count = input.value.length;
+            const valid = count >= MIN_CHARS;
             counter.textContent = `${count} / ${MAX_CHARS} characters`;
-            counter.classList.toggle("valid", count >= MIN_CHARS);
+            counter.classList.toggle("valid", valid && count > 0);
             counter.classList.toggle("invalid", count < MIN_CHARS && count > 0);
         }
-
         function updateSubmitButton() {
             const btn = document.getElementById("submitBtn");
             const now = Date.now();
@@ -784,7 +747,6 @@
                 if (cooldownTimer) clearInterval(cooldownTimer);
             }
         }
-
         function submitFeedback() {
             const input = document.getElementById("feedbackInput").value.trim();
             const status = document.getElementById("statusMessage");
@@ -795,31 +757,36 @@
             }
             status.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg><span>Sending...</span>';
             status.className = "status-message status-sending";
-
             fetch(WEBHOOK_URL, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ content: `**New Feedback from Berg Hub**\n\n${input}` })
+                body: JSON.stringify({ content: `**New Feedback from Berg Hub Website**\n\n${input}` })
             })
             .then(r => {
                 if (r.ok) {
                     status.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg><span>Feedback sent! Thank you.</span>';
                     status.className = "status-message status-success";
-                    confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 }, colors: ['#ff2a2a', '#ffffff', '#b30000', '#ff6666'] });
+                    confetti({
+                        particleCount: 120,
+                        spread: 80,
+                        origin: { y: 0.6 },
+                        colors: ['#ff2a2a', '#ffffff', '#b30000', '#ff6666']
+                    });
                     document.getElementById("feedbackInput").value = "";
                     updateCharCounter();
                     lastSubmitTime = Date.now();
                     updateSubmitButton();
                     if (!cooldownTimer) cooldownTimer = setInterval(updateSubmitButton, 1000);
-                } else throw new Error();
+                } else {
+                    throw new Error();
+                }
             })
             .catch(() => {
                 status.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span>Error. Try again later.</span>';
                 status.className = "status-message status-error";
             });
         }
-
-        // Snow Effect
+        // SNOW EFFECT
         const canvas = document.getElementById('snowCanvas');
         const ctx = canvas.getContext('2d');
         let particleCount = window.innerWidth <= 768 ? 50 : 120;
@@ -844,7 +811,10 @@
             update() {
                 this.x += this.speedX;
                 this.y += this.speedY;
-                if (this.y > canvas.height) { this.y = -10; this.x = Math.random() * canvas.width; }
+                if (this.y > canvas.height) {
+                    this.y = -10;
+                    this.x = Math.random() * canvas.width;
+                }
                 if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
             }
             draw() {
@@ -867,8 +837,7 @@
         }
         initParticles();
         animate();
-
-        // Background Music
+        // BACKGROUND MUSIC
         const music = document.getElementById('bgMusic');
         const musicIcon = document.getElementById('musicIcon');
         const musicText = document.getElementById('musicText');
